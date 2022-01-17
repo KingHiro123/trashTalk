@@ -23,21 +23,13 @@
             <a href="/signup" class="Register"> Register </a>
         </div>
     </div>
-<h1 class="display-4">Account List</h1>
-<div>
-  {% if count == 0 %}
-  <p>There are no users.</p>
-  {% elif count == 1 %}
-  <p>There is 1 user.</p>
-  {% else %}
-  <p>There are {{ count }} users.</p>
-  {% endif %}
-</div>
 
-<div>
+<div class="main_content">
+    <h1 class="display-4">Account List</h1>
     <table class="table table-striped">
   <thead>
       <tr>
+          <th>ID</th>
         <th>Username</th>
         <th>Email</th>
         <th>Password</th>
@@ -52,9 +44,9 @@
         <td>{{ list.get_email() }}</td>
         <td>{{ list.get_password() }}</td>
 
-        <td><a href="#" class="btn btn-warning">Update</a></td>
+        <td><a href="/Update/{{list.get_user_id()}}" class="btn btn-warning">Update</a></td>
         <td>
-          <form action="" method="POST">
+          <form action="{{ url_for('delete_user', id=list.get_user_id()) }}" method="POST">
             <input type="submit" value="Delete" class="btn btn-danger">
           </form>
         </td>
@@ -62,6 +54,7 @@
     {% endfor %}
     </tbody>
   </table>
+</div>
 </div>
 {% endblock %}
 

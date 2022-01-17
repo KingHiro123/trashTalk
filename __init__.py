@@ -56,6 +56,52 @@ def acc_list():
         acc_list.append(list)
 
     return render_template('Acc_Man.html', count=len(acc_list), acc_list=acc_list)
+
+@app.route('/Update/<int:id>/', methods=['GET', 'POST'])
+def update_signup(id):
+    update_signup_form = Signup_Form(request.form)
+    if request.method == 'POST' and update_signup_form.validate():
+        user_dict = {}
+        db = shelve.open('sign_up.db', 'w')
+        user_dict = db['signUp']
+
+        list = user_dict.get(id)
+        list.set_username(update_signup_form.username.data)
+        list.set_email(update_signup_form.email.data)
+        list.set_password(update_signup_form.password.data)
+        list.set_confirmpass(update_signup_form.confirmpass.data)
+
+        db['signUp'] = user_dict
+        db.close()
+
+        return redirect(url_for('acc_list'))
+    else:
+        user_dict = {}
+        db = shelve.open('sign_up.db', 'r')
+        user_dict = db['signUp']
+        db.close()
+
+        list = user_dict.get(id)
+        update_signup_form.username.data = list.get_username()
+        update_signup_form.email.data = list.get_email()
+        update_signup_form.password.data = list.get_password()
+        update_signup_form.confirmpass.data = list.get_confirmpass()
+
+        return render_template('Update.html', form=update_signup_form)
+
+@app.route('/deleteUser/<int:id>', methods=['POST'])
+def delete_user(id):
+    user_dict = {}
+    db = shelve.open('sign_up.db', 'w')
+    user_dict = db['signUp']
+
+    user_dict.pop(id)
+
+    db['signUp'] = user_dict
+    db.close()
+
+    return redirect(url_for('acc_list'))
+
 if __name__ == "__main__":
     app.run()
 
