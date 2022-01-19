@@ -1,5 +1,9 @@
-class Login:
-    def __init__(self, username,  password):
+from re import U
+import User 
+
+class Login(User.User):
+    def __init__(self, user_id, name, address, username,  password):
+        super().__init__(user_id, name, address)
         self.__username = username
         self.__password = password
 

@@ -47,13 +47,46 @@
         <td><a href="/Update/{{list.get_user_id()}}" class="btn btn-warning">Update</a></td>
         <td>
           <form action="{{ url_for('delete_user', id=list.get_user_id()) }}" method="POST">
-            <input type="submit" value="Delete" class="btn btn-danger">
+            <!--<input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete {{list.get_username()}}?');">-->
+            
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal_{{ list.get_user_id() }}">
+              Delete
+            </button>
+          </div>
+          
+          <!-- The Modal -->
+          <div class="modal fade" id="myModal_{{ list.get_user_id() }}">
+            <div class="modal-dialog">
+              <div class="modal-content">
+          
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h4 class="modal-title">Delete Confirmation</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+          
+                <!-- Modal body -->
+                <div class="modal-body">
+                  Are you sure you want to delete {{list.get_username()}}?
+                </div>
+          
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                  <input type="Submit" value="Delete" class="btn btn-danger" data-bs-dismiss="modal"> 
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
           </form>
         </td>
       </tr>
     {% endfor %}
     </tbody>
   </table>
+
+  
+
 </div>
 </div>
 {% endblock %}

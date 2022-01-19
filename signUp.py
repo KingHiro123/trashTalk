@@ -38,6 +38,6 @@ class Signup:
     def set_password(self, password):
         self.__password = password
 
-    def set_rpassword(self, confirmpass):
+    def set_confirmpass(self, confirmpass):
         self.__confirmpass = confirmpass
 

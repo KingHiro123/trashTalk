@@ -1,14 +1,51 @@
-from flask import Flask, render_template, url_for, redirect, request
+from flask import Flask, render_template, url_for, redirect, request, flash
+from flask_rbac import RBAC
 from Forms import Signup_Form, Login_Form
 import shelve, signUp, Login
 
 
 app = Flask(__name__)
 
+app.config['SECRET_KEY'] = 'bananaisagoodfruit'
+#Home
 @app.route("/")
 def home():
     return render_template("Home_Admin.html")
 
+#Log in
+@app.route('/login', methods=['GET','POST'])
+def login():
+    login = Login_Form(request.form)
+    if request.method == "POST" and login.validate():
+        users_dict = {}
+        db = shelve.open('sign_up.db', 'w')
+        
+        try:
+            users_dict = db['signUp']
+        except IOError:
+            print("Error, trying to read")
+
+        username = request.form.get('username')
+        password = request.form.get('password')
+
+        for key in users_dict:
+            user = users_dict[key]
+            
+            if login.username.data == user.get_username() and login.password.data == user.get_password():
+                flash('You have successfully logged in!')
+                db['signUp'] = users_dict
+                db.close()
+                return redirect(url_for('home'))
+            elif login.username.data != user.get_username() or login.password.data != user.get_password():
+                flash('Invalid username or password! Please check your login details and try again.')
+                db['signUp'] = users_dict
+                db.close()
+                return redirect(url_for('login'))
+
+    
+    return render_template('Login.html', form=login)
+
+#Sign up
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     Signup = Signup_Form(request.form)
@@ -24,32 +61,40 @@ def signup():
         signup_dict[sign_up.get_user_id()] = sign_up
         db['signUp'] = signup_dict
 
-        #test code
-        signup_dict = db['signUp']
-        signup = signup_dict[sign_up.get_user_id()]
-        print(signup.get_username(), "was stored in user.db successfully with user_id ==",
-              signup.get_user_id())
+        for key in signup_dict:
+            signin = signup_dict[key]
+        
+            if Signup.username.data == signin.get_username():
+                flash('This username has already been used.')
+                db.close()
 
-        db.close()
+                return redirect(url_for('signup'))
+            elif Signup.email.data == signin.get_email():
+                flash('This email has already been used.')
+                db.close()
 
-        return redirect(url_for('home'))
+                return redirect(url_for('signup'))
+            else:
+                flash(f'Account created for {Signup.username.data}!', 'success')
+                db['signUp'] = signup_dict
+                db.close()
+
+            return redirect(url_for('acc_list'))
     return render_template('signUp.html', form=Signup)
 
-#@app.route('/login', methods=['GET', 'POST'])
-#def login():
-#    Login = Login_Form(request.form)
-#    if request.method == 'POST' and Login.validate():
-#        if Login.username.data == 'signup.db' and Login.password.data == 'signup.db':
-
-#    return render_template('Login.html', form=Login)
-
+#Account Management
 @app.route('/account')
 def acc_list():
     signup_dict = {}
-    db = shelve.open('sign_up.db', 'r')
-    signup_dict = db['signUp']
-    db.close()
-
+    try:
+        db = shelve.open('sign_up.db', 'r')
+        signup_dict = db['signUp']
+        db.close()
+    except IOError:
+        print("Error has occurred while trying to read.")
+    except:
+        print('An unknown error has occurred.')
+        
     acc_list = []
     for key in signup_dict:
         list = signup_dict.get(key)
@@ -103,5 +148,4 @@ def delete_user(id):
     return redirect(url_for('acc_list'))
 
 if __name__ == "__main__":
-    app.run()
-
+    app.run(debug=True)

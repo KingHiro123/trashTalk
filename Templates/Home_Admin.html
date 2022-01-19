@@ -10,7 +10,7 @@
     <div class="sidebar">
         <h2>TrashTalk</h2>
         <ul>
-            <li class="current"><a href="/">Home</a></li>
+            <li class="current"><a href="/">Dashboard</a></li>
             <li class="notcurrent"><a href="/account"><i>Account Management</i></a> </li>
             <li class="notcurrent"><a href="#"><i>Customer Support</i></a> </li>
             <li class="notcurrent"><a href="#"><i>Inventory</i></a> </li>
@@ -24,10 +24,19 @@
         </div>
     </div>
     <div class="main_content">
-        <div class="header">hello</div>
+        <div class="header">YEET</div>
         <div class="info">
-            <div>lorem lorem</div>
+            <div>Banana</div>
         </div>
     </div>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
     </div>
 {% endblock %}
