@@ -2,9 +2,6 @@ from wtforms import Form, StringField, EmailField, SubmitField, PasswordField, v
 from wtforms.validators import EqualTo, Length
 from validate_email_address import validate_email
 
-
-import signUp
-
 class Signup_Form(Form):
     username = StringField('Username',[validators.DataRequired(), Length(min=2)])
     email = EmailField('Email', [validators.Email(), validators.DataRequired()])

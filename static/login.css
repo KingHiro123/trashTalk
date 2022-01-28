@@ -19,11 +19,6 @@ section {
     align-items: center;
 }
 
-section.side {
-    background: url(./images/bk.png) no-repeat;
-    background-size: 100% 102%;
-}
-
 .side img {
     width: 50%;
     max-width: 50%;
@@ -92,7 +87,7 @@ input ~ i {
     position: absolute;
     left: 32px;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-55%);
     color: #888;
     transition: color   0.4s;
 }

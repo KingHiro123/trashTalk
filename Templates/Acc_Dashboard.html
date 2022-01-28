@@ -2,10 +2,34 @@
 
 {% block title %}
     <title class="">TrashTalk</title>
-    <link rel="stylesheet" type="text/css" href=" {{ url_for('static', filename='main.css') }}" >
+    <link rel="stylesheet" type="text/css" href=" {{ url_for('static', filename='navbar.css') }}" >
 {% endblock %}
 
 {% block content %}
+<nav>
+    <div class="container">
+        <h2>TrashTalk</h2>
+        <div class="search-bar">
+            <span class="material-icons-sharp"> search </span>
+            <input type='search'>
+        </div>
+
+        <div class='profile'>
+            <div class="photo">
+                <img src="./Templates/images/BlackHayate.jpg">
+            </div>
+            <h5> Welcome, banana! </h5>
+            <span class="material-icons-sharp"> expand_more </span>
+            
+            <button id="menu-btn">
+                <span class="material-icons-sharp"> menu </span>
+            </button>
+        </div>
+
+    </div>
+</nav>
+<!-- END OF NAVBAR -->
+
 <div class="wrapper">
     <div class="sidebar">
         <h2>TrashTalk</h2>

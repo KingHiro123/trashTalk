@@ -1,51 +1,51 @@
-{% extends 'base.html' %}
-
+{% extends 'base.html' %} 
 {% block title %}
-    <title class="">TrashTalk</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href=" {{ url_for('static', filename='login.css') }}" >
+<title class="">TrashTalk</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet" />
 {% endblock %}
 
-{% block content %}
+{% block content %} 
 {% from "includes/_formHelper.html" import render_field %}
-<div class="login-container">
-    <p class="title">Login</p>
-    <div class="separator"></div>
-    <p class="welcome-message">Please, provide login credential to proceed and have access to all our services</p>
+<h1 class="display-4">Login</h1>
 
-    <form class="login-form">
-        <div class="form-control">
-            <input type="text" placeholder="Username">
-            {{render_field(form.username, class="form-control") }}
-            <i class="fas fa-user"></i>
-        </div>
-        <div class="form-control">
-            <input type="password" placeholder="Password">
-            {{render_field(form.password, class="form-control") }}
-            <i class="fas fa-lock"></i>
-        </div>
+<form method="POST" action="">
+  <div class="form-group">
+    {{render_field(form.username, class="form-control") }} 
+  </div>
+  <div class="form-group">
+    {%if form.password.errors %}
+        {{render_field(form.password, class="form-control") }}
+            <div class="invalid-feedback">
+                <span> {{ error }} </span>
+            </div>
+        {% else %}
+        {{render_field(form.password, class="form-control") }}
+    {% endif %} 
+  </div>
+ <input type="submit" value="Submit" class="btn btn-primary" />
+</form>
 
-        <button class="submit">Login </button>
-    </form>
-
-    <div class="border">
-        <small class="text-muted">
-        Are you new? <a class="ml-2" href="/signup">Sign Up</a>
-        </small>
-    </div>
-
+<div class="border">
+  <small class="text-muted">
+    Already have an account?
+    <a class="ml-2" href="/signup">Sign up</a>
+  </small>
+</div>
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
-            {% for category, message in messages %}
-            <div class="alert alert-{{ category }}">
-                {{ message }}
-            </div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-    </div>
-</div?
-    
+            {% for category, message in messages %} 
+                <div class="alert alert-{{ category }}">
+                    {{ message }} 
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %} 
 {% endblock %}
+
+
+
+
+
+
 

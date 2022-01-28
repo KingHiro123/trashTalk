@@ -28,20 +28,22 @@
         {% endif %}
     </div>
     <input type="submit" value="Submit" class="btn btn-primary"/>
-</form>
 
 <div class="border">
     <small class="text-muted">
         Already have an account? <a class="ml-2" href="/login">Sign In</a>
     </small>
 </div>
+
 {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
+        {% if messages %}
+            {% for category, message in messages %}
                 <div class="alert alert-{{ category }}">
                     {{ message }}
                 </div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</form>
+
 {% endblock %}
