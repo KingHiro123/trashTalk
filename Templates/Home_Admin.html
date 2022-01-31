@@ -8,7 +8,7 @@
 {% block content %}
 <div class="wrapper">
     <div class="sidebar">
-        <h2>TrashTalk</h2>
+        <h2>TrashTalk {{user}}</h2>
         <hr>
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
@@ -29,15 +29,15 @@
             <li class="notcurrent"><a href="#"><i>Rewards</i></a> </li>
         </ul>
         <hr>
-            {% if current_user.is_authenticated %}
+            {% if not user %}
             <div class="Users">
-                <a href="#"> Welcome, {{ current_user.username }} </a>
-                <a href="/logout" class="Logout"> Logout </a>
+                <a href="/login" class="Login"> Login </a>
+                <a href="/signup" class="Register"> Register </a>
             </div>
-            {% else %}
+            {% elif user.is_authenticated %}
                 <div class="Users">
-                    <a href="/login" class="Login"> Login </a>
-                    <a href="/signup" class="Register"> Register </a>
+                    <a href="#"> Welcome, {{ user.username }} </a>
+                    <a href="/logout" class="Logout"> Logout </a>
                 </div>
             {% endif %}
 
