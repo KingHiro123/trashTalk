@@ -3,19 +3,29 @@ from multiprocessing.sharedctypes import Value
 from flask import Flask, render_template, url_for, redirect, request, flash, session
 from flask_rbac import RBAC
 from Forms import Signup_Form, Login_Form
-import shelve, signUp, Login as Login
-from flask_login import current_user, login_user, logout_user
+import shelve, signUp
+from flask_login import current_user, login_user, logout_user, LoginManager
 
 
 app = Flask(__name__)
+login_manager = LoginManager(app)
+@login_manager.user_loader
+def load_user(user_id):
+    db = shelve.open('sign_up.db', 'r')
+    signup_dict = db['signUp']
+    db.close()
+
+    return signup_dict.get(user_id)
 
 app.config['SECRET_KEY'] = 'bananaisagoodfruit'
 @app.route("/")
 def home():
-    return render_template("Home_Admin.html")
+    return render_template("Home_Admin.html", current_user=current_user)
 
 #Log in
+
 @app.route('/login', methods=['GET','POST'])
+    
 def login():
 
     login = Login_Form(request.form)
@@ -40,13 +50,13 @@ def login():
                         flash('Invalid username or password! Please check your login details and try again.')
 
                         return redirect(url_for('login'))
-                    else:
-                        login_user(user)
-                        flash('You have successfully logged in!')
-                        db.close()
+                
+            login_user(user)
+            flash('You have successfully logged in!')
+            db.close()
 
-                        print(user)
-                        return redirect(url_for('home', user=user))   
+            print(user)
+            return redirect(url_for('home', current_user=current_user))   
 
         except IOError:
             print("Error, it does not exist")
@@ -64,30 +74,43 @@ def signup():
 
         try:
             signup_dict = db['signUp']
-
-            for key in signup_dict:
-                user = signup_dict[key]
-
-                if sign_up.username.data == user.get_username():
-                    flash('This username has already been used.')
-
-                    return redirect(url_for('signup'))
-
-                elif sign_up.email.data == user.get_email():
-                    flash('This email has already been used.')
-
-                    return redirect(url_for('signup'))
-                else:
-                    s_up = signUp.Signup(sign_up.username.data, sign_up.email.data, sign_up.password.data, sign_up.confirmpass.data)
-
-                    flash(f'Account created for {sign_up.username.data}!', 'success')
-                    signup_dict[s_up.get_user_id()] = s_up
-                    db['signUp'] = signup_dict
-                    db.close()
-
-                    return redirect(url_for('acc_list'))
         except:
             print("Error in retrieving Users from sign_up.db")
+
+        if len(signup_dict) > 0:
+            for key in signup_dict:
+                    user = signup_dict[key]
+
+                    if sign_up.username.data == user.get_username():
+                        flash('This username has already been used.')
+
+                        return redirect(url_for('signup'))
+
+                    elif sign_up.email.data == user.get_email():
+                        flash('This email has already been used.')
+
+                        return redirect(url_for('signup'))
+                    
+            s_up = signUp.Signup(sign_up.username.data, sign_up.email.data, sign_up.password.data, sign_up.confirmpass.data)
+
+            flash(f'Account created for {sign_up.username.data}!', 'success')
+            if len(signup_dict) > 0:
+                s_up.set_user_id(list(signup_dict)[-1]+1) 
+
+            signup_dict[s_up.get_user_id()] = s_up
+            db['signUp'] = signup_dict
+            db.close()
+
+            return redirect(url_for('acc_list'))
+        else:
+            s_up = signUp.Signup(sign_up.username.data, sign_up.email.data, sign_up.password.data, sign_up.confirmpass.data)
+
+            flash(f'Account created for {sign_up.username.data}!', 'success')
+            signup_dict[s_up.get_user_id()] = s_up
+            db['signUp'] = signup_dict
+            db.close()
+
+            return redirect(url_for('acc_list'))
 
     return render_template('signUp.html', form=sign_up)
 
@@ -105,6 +128,13 @@ def auth():
             return render_template("Home_Admin.html")
         else:
             return render_template("Login.html")
+
+
+
+
+
+
+
 
 #Account Management
 @app.route('/account')

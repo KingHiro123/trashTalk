@@ -1,16 +1,22 @@
-class Signup:
+from flask_login import UserMixin
+class Signup(UserMixin):
     count_id = 0
 
     def __init__(self, username, email, password, confirmpass):
+        super().__init__()
         Signup.count_id += 1
+        
         self.__user_id = Signup.count_id
         self.__username = username
         self.__email = email
         self.__password = password
         self.__confirmpass = confirmpass
 
-
+    
     def get_user_id(self):
+        return self.__user_id
+
+    def get_id(self):
         return self.__user_id
 
     def get_username(self):
