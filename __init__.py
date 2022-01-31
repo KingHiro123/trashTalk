@@ -45,7 +45,7 @@ def login():
                         flash('You have successfully logged in!')
                         db.close()
 
-                        print(user.is_authenticated())
+                        print(user)
                         return redirect(url_for('home', user=user))   
 
         except IOError:
