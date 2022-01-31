@@ -1,15 +1,15 @@
+from cmath import log
 from multiprocessing.sharedctypes import Value
-from flask import Flask, render_template, url_for, redirect, request, flash
+from flask import Flask, render_template, url_for, redirect, request, flash, session
 from flask_rbac import RBAC
 from Forms import Signup_Form, Login_Form
 import shelve, signUp, Login as Login
-import os 
+from flask_login import current_user, login_user, logout_user
+
 
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'bananaisagoodfruit'
-r, w = os.pipe()
-#Home
 @app.route("/")
 def home():
     return render_template("Home_Admin.html")
@@ -17,6 +17,7 @@ def home():
 #Log in
 @app.route('/login', methods=['GET','POST'])
 def login():
+
     login = Login_Form(request.form)
     if request.method == "POST" and login.validate():
         users_dict = {}
@@ -25,21 +26,32 @@ def login():
             db = shelve.open('sign_up.db', 'r')
             users_dict = db['signUp']
 
+            attempted_username = request.form['username']
+            attempted_password = request.form['password']
+
             for key in users_dict:
                 user = users_dict[key]
-                    
-                if login.username.data != user.get_username() or login.password.data != user.get_password():
-                    flash('Invalid username or password! Please check your login details and try again.')
-
-                    return redirect(url_for('login'))
+                
+                if attempted_username == 'admin' and attempted_password == 'password':
+                    login_user(user)
+                    return redirect(url_for('acc_list'))
                 else:
-                    flash('You have successfully logged in!')
-                    db.close()
+                    if login.username.data != user.get_username() or login.password.data != user.get_password():
+                        flash('Invalid username or password! Please check your login details and try again.')
 
-                    return redirect(url_for('home'))            
+                        return redirect(url_for('login'))
+                    else:
+                        login_user(user)
+                        flash('You have successfully logged in!')
+                        db.close()
+
+                        print(user.is_authenticated())
+                        return redirect(url_for('home', user=user))   
+
         except IOError:
             print("Error, it does not exist")
     
+
     return render_template('Login_Tryouts.html', form=login)
 
 #Sign up
@@ -77,8 +89,22 @@ def signup():
         except:
             print("Error in retrieving Users from sign_up.db")
 
-
     return render_template('signUp.html', form=sign_up)
+
+#Logout
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('home'))
+
+#Authentication
+@app.route('/login_authentication', methods=['GET', 'POST'])
+def auth():
+    if request.method == 'GET':
+        if current_user.is_authenticated:
+            return render_template("Home_Admin.html")
+        else:
+            return render_template("Login.html")
 
 #Account Management
 @app.route('/account')

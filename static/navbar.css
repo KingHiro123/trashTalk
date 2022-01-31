@@ -113,6 +113,14 @@ body {
     margin-left: 200px;
 }
 
+hr {
+    margin: 1rem 0;
+    color: inherit;
+    background-color: black;
+    border: 0;
+    opacity: 25;
+}
+
 .wrapper .sidebar .Users {
     position: absolute;
     bottom: 0;

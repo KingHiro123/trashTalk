@@ -2,34 +2,15 @@
 
 {% block title %}
     <title class="">TrashTalk</title>
-    <link rel="stylesheet" type="text/css" href=" {{ url_for('static', filename='main.css') }}" >
+    <link rel="stylesheet" type="text/css" href=" {{ url_for('static', filename='navbar.css') }}" >
 {% endblock %}
 
 {% block content %}
 <div class="wrapper">
     <div class="sidebar">
         <h2>TrashTalk</h2>
-        <ul>
-            <li class="current"><a href="/">Dashboard</a></li>
-            <li class="notcurrent"><a href="/account"><i>Account Management</i></a> </li>
-            <li class="notcurrent"><a href="#"><i>Customer Support</i></a> </li>
-            <li class="notcurrent"><a href="#"><i>Inventory</i></a> </li>
-            <li class="notcurrent"><a href="#"><i>Transaction</i></a> </li>
-            <li class="notcurrent"><a href="#"><i>Rewards</i></a> </li>
-        </ul>
-
-        <div class="Users">
-            <a href="/login" class="Login"> Login </a>
-            <a href="/signup" class="Register"> Register </a>
-        </div>
-    </div>
-    <div class="main_content">
-        <div class="header">YEET</div>
-        <div class="info">
-            <div>Banana</div>
-        </div>
-    </div>
-    {% with messages = get_flashed_messages(with_categories=true) %}
+        <hr>
+        {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 {% for category, message in messages %} 
                 <div class="alert alert-{{ category }}">
@@ -38,5 +19,35 @@
                 {% endfor %}
             {% endif %}
         {% endwith %}
+        
+        <ul>
+            <li class="current"><a href="/">Dashboard</a></li>
+            <li class="notcurrent"><a href="/account"><i>Account Management</i></a> </li>
+            <li class="notcurrent"><a href="#"><i>Customer Support</i></a> </li>
+            <li class="notcurrent"><a href="#"><i>Inventory</i></a> </li>
+            <li class="notcurrent"><a href="#"><i>Transaction</i></a> </li>
+            <li class="notcurrent"><a href="#"><i>Rewards</i></a> </li>
+        </ul>
+        <hr>
+            {% if current_user.is_authenticated %}
+            <div class="Users">
+                <a href="#"> Welcome, {{ current_user.username }} </a>
+                <a href="/logout" class="Logout"> Logout </a>
+            </div>
+            {% else %}
+                <div class="Users">
+                    <a href="/login" class="Login"> Login </a>
+                    <a href="/signup" class="Register"> Register </a>
+                </div>
+            {% endif %}
+
     </div>
+
+    <div class="main_content">
+        <div class="header">YEET</div>
+        <div class="info">
+            <div>Banana</div>
+        </div>
+    </div>  
+</div>
 {% endblock %}

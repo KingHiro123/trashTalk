@@ -1,5 +1,7 @@
-class User:
+from flask_login import UserMixin
+class User(UserMixin):
     def __init__(self, user_id, name,address):
+        super().__init__()
         self.__user_id = user_id
         self.__name = name
         self.__address= address
