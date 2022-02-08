@@ -63,7 +63,7 @@ nav .profile button {
 }
 body {
     margin: 0;
-    font-family: sans-serif
+    font-family: sans-serif;
 }
 .wrapper {
     display: flex;
@@ -86,8 +86,8 @@ body {
 
 .wrapper .sidebar ul li{
     padding: 30px;
-    border-bottom: 1px solid rgba(0,0,0,0.05)
-    border-top: 1px solid rgba(255,255,255,0.05)
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    border-top: 1px solid rgba(255,255,255,0.05);
 }
 
 .wrapper .sidebar ul .notcurrent a{
@@ -121,24 +121,10 @@ hr {
     opacity: 25;
 }
 
+img {
+    border-radius: 50%;
+  }
+
 .wrapper .sidebar .Users {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translate(-50%);
-    display: flex;
+    
 }
-
-.wrapper .sidebar .Users a{
-    display: block;
-    width: 80px;
-    background: #594f8d;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-    margin: 0 5px;
-    color: #bdb8d7;
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
-}
-
