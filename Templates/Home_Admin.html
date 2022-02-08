@@ -6,20 +6,21 @@
 {% endblock %}
 
 {% block content %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+    {% for category, message in messages %} 
+    <div class="alert alert-{{ category }}">
+        {{ message }}
+    </div>
+    {% endfor %}
+{% endif %}
+{% endwith %}
+
 <div class="wrapper">
     <div class="sidebar">
         <h2>TrashTalk {{user}}</h2>
         <hr>
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %} 
-                <div class="alert alert-{{ category }}">
-                    {{ message }}
-                </div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-        
+
         <ul>
             <li class="current"><a href="/">Dashboard</a></li>
             <li class="notcurrent"><a href="/account"><i>Account Management</i></a> </li>
@@ -31,15 +32,18 @@
         <hr>
         {% if current_user.is_authenticated %}
             <div class="Users">
-                <a href="#"> Welcome, {{ current_user.get_username() }} </a>
-                <a href="/logout" class="Logout"> Logout </a>
+                <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle show" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="true">
+                    <img src="/static/images/BlackHayate.jpg" alt="Shiba Inu" width="32" height="32" class="img-fluid rounded-circle me-1">
+                    <strong> {{ current_user.get_username() }} </strong>
+                    <a href="/logout"><button type="button" class="btn btn-outline-light me-2"> Logout  </button></a>
+                </a>
             </div>
-            {% else %}
+        {% else %}
             <div class="Users">
-                <a href="/login" class="Login"> Login </a>
-                <a href="/signup" class="Register"> Register </a>
+                <a href="/login"><button type="button" class="btn btn-outline-light me-2"> Login  </button></a>
+                <a href="/signup"><button type="button" class="btn btn-primary"> Register </button></a>
             </div>
-            {% endif %}
+        {% endif %}
 
     </div>
 

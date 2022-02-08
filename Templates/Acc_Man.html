@@ -2,13 +2,13 @@
 
 {% block title %}
     <title class="">TrashTalk</title>
-    <link rel="stylesheet" type="text/css" href=" {{ url_for('static', filename='main.css') }}" >
+    <link rel="stylesheet" type="text/css" href=" {{ url_for('static', filename='navbar.css') }}" >
 {% endblock %}
 
 {% block content %}
 <div class="wrapper">
     <div class="sidebar">
-        <h2>TrashTalk</h2>
+        <h2>TrashTalk</h2> 
         <ul>
             <li class="notcurrent"><a href="/">Dashboard</a></li>
             <li class="current"><a href="/account"><i>Account Management</i></a> </li>
@@ -18,10 +18,20 @@
             <li class="notcurrent"><a href="#"><i>Rewards</i></a> </li>
         </ul>
 
-        <div class="Users">
-            <a href="/login" class="Login"> Login </a>
-            <a href="/signup" class="Register"> Register </a>
-        </div>
+        {% if current_user.is_authenticated %}
+            <div class="Users">
+                <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle show" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="true">
+                    <img src="/static/images/BlackHayate.jpg" alt="Shiba Inu" width="32" height="32" class="img-fluid rounded-circle me-1">
+                    <strong> {{ current_user.get_username() }} </strong>
+                    <a href="/logout"><button type="button" class="btn btn-outline-light me-2"> Logout  </button></a>
+                </a>
+            </div>
+        {% else %}
+            <div class="Users">
+                <a href="/login"><button type="button" class="btn btn-outline-light me-2"> Login  </button></a>
+                <a href="/signup"><button type="button" class="btn btn-primary"> Register </button></a>
+            </div>
+        {% endif %}
     </div>
 
 <div class="main_content">

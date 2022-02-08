@@ -44,15 +44,15 @@ def login():
                 
                 if attempted_username == 'admin' and attempted_password == 'password':
                     login_user(user)
-                    return redirect(url_for('acc_list'))
+                    return redirect(url_for('home'))
                 else:
                     if login.username.data != user.get_username() or login.password.data != user.get_password():
-                        flash('Invalid username or password! Please check your login details and try again.')
+                        flash(f'Invalid username or password! Please check your login details and try again.', 'warning')
 
                         return redirect(url_for('login'))
                 
-            login_user(user)
-            flash('You have successfully logged in!')
+            login_user(user, remember=login.remember.data)
+            flash(f'Successfully logged in!', 'success')
             db.close()
 
             print(user)
