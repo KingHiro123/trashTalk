@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+{% from 'includes/_formHelper.html' import render_field %}
+
+<html lang="en">
+<title class="">TrashTalk</title>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='voucher.css') }}" />
+    <div class="wrapper">
+        <div class="sidebar">
+            <h2>TrashTalk</h2>
+            <ul>
+                <li class="notcurrent"><a href="/"><i>Account Management</i></a> </li>
+                <li class="notcurrent"><a href="#"><i>Customer Support</i></a> </li>
+                <li class="notcurrent"><a href="#"><i>Inventory</i></a> </li>
+                <li class="notcurrent"><a href="#"><i>Transaction</i></a> </li>
+                <li class="notcurrent"><a href="/rewards"><i>Rewards</i></a> </li>
+                <li class="notcurrent"><a href="/claimedRewards"><i>Claimed Rewards</i></a></li>
+                <li class="notcurrent"><a href="/createVoucher"><i>Create Voucher</i></a> </li>
+                <li class="current"><a href="/retrieveVoucher"><i>Retrieve Voucher</i></a> </li>
+            </ul>
+        </div>
+    </div>
+
+<div class = "mainbody">
+  {% extends "base.html" %}
+{% block title %}TrashTalk - Retrieve Voucher{% endblock %}
+
+{% block content %}
+{% from "includes/_formHelper.html" import render_field %}
+<h1 class="display-4">Retrieve Vouchers</h1>
+<div>
+  {% if count == 0 %}
+  <p>There are no vouchers.</p>
+  {% elif count == 1 %}
+  <p>There is 1 voucher.</p>
+  {% else %}
+  <p>There are {{ count }} vouchers.</p>
+  {% endif %}
+</div>
+<div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Voucher ID</th>
+        <th>Discount</th>
+        <th>Expiry Date</th>
+        <th>Points Required</th>
+        <th>Date Created</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for voucher in vouchers_list %}
+      <tr>
+        <td>{{ voucher.get_voucher_id() }}</td>
+        <td>{{ voucher.get_discount() }}</td>
+        <td>{{ voucher.get_expiry_date() }}</td>
+        <td>{{ voucher.get_points() }}</td>
+        <td>{{ voucher.get_created_date() }}</td>
+
+        <td><a href="/updateVoucher/{{voucher.get_voucher_id()}}" class="btn btn-warning">Update</a></td>
+        <td>
+          <form action="{{url_for('delete_voucher',id=voucher.get_voucher_id())}}" method="POST">
+
+          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal_{{voucher.get_voucher_id()}}">
+            Delete
+          </button>
+
+          <!--The Modal -->
+          <div class ="modal" id="myModal_{{voucher.get_voucher_id()}}">
+            <div class="modal-dialog">
+              <div class="modal-content">
+
+                <!--Modal Header-->
+                <div class="modal-header">
+                  <h4 class="modal-title">Delete Confirmation</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!--Modal Body-->
+                <div class="modal-body">
+                  Are you sure you want to delete this voucher?
+                </div>
+
+                <!--Modal footer-->
+                <div class="modal-footer">
+                  <input type="submit" value="Delete" class="btn btn-danger">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+</div>
+{% endblock %}
