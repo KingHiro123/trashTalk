@@ -42,6 +42,7 @@ def login():
             for key in users_dict:
                 user = users_dict[key]
                 
+                #the admin is still being tested, once the group has their code integrated
                 if attempted_username == 'admin' and attempted_password == 'password':
                     login_user(user)
                     return redirect(url_for('home'))
