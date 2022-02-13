@@ -23,6 +23,7 @@ def rewards():
 
 @app.route('/claimedRewards')
 def claimed_rewards():
+    current_user_id = 0
     vouchers_dict = {}
     db = shelve.open('voucher.db', 'r')
     vouchers_dict = db['Vouchers']
