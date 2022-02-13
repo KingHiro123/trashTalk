@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% from 'includes/_formHelper.html' import render_field %}
+
+<html lang="en">
+<title class="">TrashTalk</title>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='voucher.css') }}" />
+    <div class="wrapper">
+        <div class="sidebar">
+            <h2>TrashTalk</h2>
+            <ul>
+                <li class="notcurrent"><a href="/"><i>Dashboard</i></a> </li>
+            <li class="notcurrent"><a href="/account"><i>Account Management</i></a> </li>
+                <li class="notcurrent"><a href="#"><i>Customer Support</i></a> </li>
+                <li class="notcurrent"><a href="#"><i>Inventory</i></a> </li>
+                <li class="notcurrent"><a href="#"><i>Transaction</i></a> </li>
+                <li class="notcurrent"><a href="/rewards"><i>Rewards</i></a> </li>
+                <li class="notcurrent"><a href="/claimedRewards"><i>Claimed Rewards</i></a></li>
+                <li class="current"><a href="/createVoucher"><i>Create Voucher</i></a> </li>
+                <li class="notcurrent"><a href="/retrieveVoucher"><i>Retrieve Voucher</i></a> </li>
+            </ul>
+        </div>
+    </div>
+    <!-- <form method="POST" action="">
+      <label for="first_name">First name:</label><br>
+      <input type="text" id="first_name" name="first_name"><br>
+      <label for="last_name">Last name:</label><br>
+      <input type="text" id="last_name" name="last_name"><br>
+      <input type="submit" value="Submit">
+    </form> -->
+<div class="mainbody">
+    {% extends "base.html" %}
+{% block title %}Trash Talk - Create Voucher{% endblock %}
+
+{% block content %}
+{% from "includes/_formHelper.html" import render_field %}
+    <form method="POST" action="">
+        <div class="form-group">
+          {{ render_field(form.discount, class="form-control") }}
+        </div>
+        <div class="form-group">
+          {{ render_field(form.expiry_date, class="form-control") }}
+        </div>
+        <div class="form-group">
+          {{ render_field(form.points, class="form-control") }}
+        </div>
+        <input type="submit" value="Submit" class="btn btn-primary"/>
+    </form>
+</div>
+{% endblock %}

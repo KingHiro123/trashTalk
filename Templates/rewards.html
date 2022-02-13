@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<title class="">TrashTalk</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='rewards.css') }}" />
+<div class="wrapper">
+    <div class="sidebar" >
+        <h2>TrashTalk</h2>
+        <ul>
+            <li class="notcurrent"><a href="/"><i>Dashboard</i></a> </li>
+            <li class="notcurrent"><a href="/account"><i>Account Management</i></a> </li>
+            <li class="notcurrent"><a href="#"><i>Customer Support</i></a> </li>
+            <li class="notcurrent"><a href="#"><i>Inventory</i></a> </li>
+            <li class="notcurrent"><a href="#"><i>Transaction</i></a> </li>
+            <li class="current"><a href="/rewards"><i>Rewards</i></a> </li>
+            <li class="notcurrent"><a href="/claimedRewards"><i>Claimed Rewards</i></a></li>
+            <li class="notcurrent"><a href="/createVoucher"><i>Create Voucher</i></a> </li>
+            <li class="notcurrent"><a href="/retrieveVoucher"><i>Retrieve Voucher</i></a> </li>
+        </ul>
+    </div>
+    <div class="container">
+        <div class="row">
+            {% for voucher in vouchers_list %}
+            <div class="col-9 col-md-3 voucher">
+                <div class="card">
+                  <div class="v_disc">{{ voucher.get_discount() }}% off any purchases</div>
+                  <div class="v_expiry">
+                  <span class="date">Expiry Date: {{ voucher.get_expiry_date() }}</span>
+                  </div>
+                    <div class="p_required">
+                      <p>Points Requried: <span class="p_no">{{ voucher.get_points() }}</span></p>
+                    </div>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#voucherModal">
+                      Claim
+                    </button>
+
+                    <div class="modal fade" id="voucherModal" tabindex="-1" aria-labelledby="voucherModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="voucherModalLabel">Claim confirmation</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            Are you sure you want to claim this voucher?
+                          </div>
+                          <div class="modal-footer">
+                            <button href="" type="button" class="btn btn-success" data-bs-dismiss="modal">Yes</button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
