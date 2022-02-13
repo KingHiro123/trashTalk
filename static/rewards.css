@@ -1,0 +1,249 @@
+* {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+  }
+  body {
+    margin: 0;
+    font-family: sans-serif;
+  }
+  .wrapper {
+    display: flex;
+    position: relative;
+  }
+  .wrapper .sidebar {
+    position: fixed;
+    width: 200px;
+    height: 100%;
+    background: #f5f7fa;
+    padding: 30px 0;
+  }
+  
+  .wrapper .sidebar h2 {
+    color: #434a54;
+    text-align: center;
+    margin-bottom: 30px;
+    font-family: Times New Roman;
+  }
+  
+  .wrapper .sidebar ul li {
+    padding: 30px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  
+  .wrapper .sidebar ul .notcurrent a {
+    color: #434a54;
+    display: block;
+  }
+  
+  .wrapper .sidebar ul .notcurrent:hover {
+    background: #594f8d;
+  }
+  
+  .wrapper .sidebar ul .notcurrent:hover a {
+    color: #fff;
+  }
+  .wrapper .sidebar ul .current a {
+    color: #fff;
+  }
+  .wrapper .sidebar ul .current {
+    background: #594f8d;
+  }
+  .wrapper .main_content {
+    width: 100%;
+    margin-left: 200px;
+  }
+  .header {
+    color: #434a54;
+    text-align: center;
+    margin-bottom: 30px;
+    font-family: Times New Roman;
+  }
+  .account {
+    display: flex;
+    position: absolute;
+    padding-left: 40px;
+    font-size: 20px;
+    padding-top: 25px;
+    color: #434a54;
+  }
+  .nav {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 1100px;
+  }
+  .nav-items {
+    display: flex;
+    align-items: center;
+  }
+  .nav-items a {
+    margin-left: 30px;
+    color: #434a54;
+  }
+  .nav-items a img {
+    width: 30px;
+  }
+  .usericon {
+    position: absolute;
+    right: 0%;
+    margin-right: 20px;
+  }
+  .claimed_vouchers{
+    background-color: #3a3b3c;
+    width: 315px;
+    height: 371px;
+    position: absolute;
+    left: 250px;
+    border-radius: 10px;
+    top: 10px;
+  }
+  .cv_head{
+    background: white;
+    text-align: center;
+    width: 286px;
+    height: 41px;
+    padding: 10px;
+    position: relative;
+    margin: auto;
+    top: 10px;
+    border-radius: 10px;
+  }
+  .points{
+    background-color: #3a3b3c;
+    width: 315px;
+    height: 175px;
+    border-radius: 10px;
+    position: absolute;
+    left: 250px;
+    top: 420px;
+  }
+  .p_head{
+    background: white;
+    text-align: center;
+    width: 286px;
+    height: 41px;
+    padding: 10px;
+    position: relative;
+    margin: auto;
+    top: 10px;
+    border-radius: 10px;
+  }
+  .p_total{
+    background: white;
+    text-align: center;
+    width: 286px;
+    height: 41px;
+    padding: 10px;
+    position: relative;
+    margin: auto;
+    top: 80px;
+    border-radius: 10px;
+  }
+  .card{
+    background-color: #3a3b3c;
+    width: 315px;
+    height: 185px;
+    border-radius: 10px;
+  }
+  .v_disc{
+    background: white;
+    text-align: center;
+    width: 276px;
+    height: 41px;
+    padding: 10px;
+    margin: auto;
+    border-radius: 10px;
+  }
+  .v_expiry{
+    background: white;
+    text-align: center;
+    width: 276px;
+    height: 41px;
+    padding: 10px;
+    margin:auto;
+    margin-bottom:0;
+    border-radius: 10px;
+  }
+  .p_required{
+    text-align: center;
+    position: relative;
+    top: 15px;
+    color: white;
+  }
+  .p_no{
+  color: white;
+  }
+  .voucher {
+      padding-top:20px;
+  }
+  .sidebar ul {
+      padding:0;
+      text-decoration:none;
+  }
+  .claim_button{
+      text-align: center;
+      padding: 2px;
+  }
+  #Btn{
+      background-color: white;
+      display: inline-block;
+      border: none;
+      margin: 4px 2px;
+      width: 50px;
+      height: 25px;
+      font-size: 14px;
+      border-radius: 5px;
+  }
+  .claim_Modal{
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  .close:hover, .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .yesBtn{
+      background-color: #4ACF50;
+      width:50px;
+      height:25px;
+      display: inline-block;
+      border: none;
+      margin: 4px 2px;
+      border-radius: 5px;
+  }
+  .noBtn{
+      background-color: #FF7F7F   ;
+      width:50px;
+      height:25px;
+      display: inline-block;
+      border: none;
+      margin: 4px 2px;
+      border-radius: 5px;
+  }
