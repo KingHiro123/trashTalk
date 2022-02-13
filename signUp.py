@@ -1,4 +1,6 @@
 from flask_login import UserMixin
+from flask_rbac import UserMixin
+
 class Signup(UserMixin):
     count_id = 0
 

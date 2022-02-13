@@ -1,13 +1,15 @@
 from cmath import log
 from multiprocessing.sharedctypes import Value
-from flask import Flask, render_template, url_for, redirect, request, flash, session
+from flask import Flask, render_template, url_for, redirect, request, flash
 from flask_rbac import RBAC
 from Forms import Signup_Form, Login_Form
 import shelve, signUp
 from flask_login import current_user, login_user, logout_user, LoginManager
+import hashlib
 
 
 app = Flask(__name__)
+rbac = RBAC(app)
 login_manager = LoginManager(app)
 @login_manager.user_loader
 def load_user(user_id):
@@ -17,6 +19,7 @@ def load_user(user_id):
 
     return signup_dict.get(user_id)
 
+app.config['RBAC_USE_WHITE'] = True
 app.config['SECRET_KEY'] = 'bananaisagoodfruit'
 @app.route("/")
 def home():
@@ -113,7 +116,7 @@ def signup():
 
             return redirect(url_for('acc_list'))
 
-    return render_template('signUp.html', form=sign_up)
+    return render_template('Signup_Tryouts.html', form=sign_up)
 
 #Logout
 @app.route('/logout')
