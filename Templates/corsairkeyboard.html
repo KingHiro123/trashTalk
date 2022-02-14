@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block head %}
+{% block title %}
     <title class="">TrashTalk - Online Gaming Store</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='main.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='productpg.css') }}">
@@ -12,9 +12,9 @@
   <div class='nav-items'>
       <a class="nav-link active" data-bs-toggle="tab" href="/usercart">
         Your Cart
-          <img src="../static/images/cart.jpg" alt="">
+          <img src="/static/images/cart.jpg" alt="">
       </a>
-      <a href="#account"><img src="../static/images/user.jpg" alt=""></a>
+      <a href="#account"><img src="/static/images/user.jpg" alt=""></a>
    </div>
 </nav>
 </div>
@@ -34,7 +34,7 @@
   <div class="main_content">
     <section class="product-details" style='width: 100%; padding: 60px 10vw; display: flex; justify-content: space-between;'>
         <div class="product-images">
-            <img src="../static/images/card3.png" width="700px" height="500px" style='position: relative; size:cover;'> <!--- THE IMAGE   --->
+            <img src="/static/images/card3.png" width="700px" height="500px" style='position: relative; size:cover;'> <!--- THE IMAGE   --->
         </div>
         <div class="details" style='width:50%; margin-left:20px;'>
         <h2 class="product-brand" style='font-size:30px; text-transform: capitalize'>
