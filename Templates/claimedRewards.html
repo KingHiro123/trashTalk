@@ -20,13 +20,32 @@
                   <div class="cv_head">
                     <p class="font">Claimed Vouchers</p>
                   </div>
-                </div>
-                <div class="points">
-                  <div class="p_head">
-                    <p class="font">Points</p>
+        </div>
+        <div class="points">
+            <div class="p_head">
+                <p class="font">Points</p>
+            </div>
+            <div class="p_total"><span class="point">100</span></div>
+        </div>
+        <div class="container">
+        <div class="row">
+            {% for voucher in vouchers_list %}
+            {% if voucher.get_claimed() == current_user.get_id() %}
+            <div class="col-9 col-md-3 voucher">
+                <div class="card">
+                  <div class="v_disc">{{ voucher.get_discount() }}% off any purchases</div>
+                  <div class="v_expiry">
+                  <span class="date">Expiry Date: {{ voucher.get_expiry_date() }}</span>
                   </div>
-                  <div class="p_total"><span class="point">100</span></div>
+                    <div class="p_required">
+                      <p>Points Requried: <span class="p_no">{{ voucher.get_points() }}</span></p>
+                    </div>
                 </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
     </div>
 </div>
 </html>

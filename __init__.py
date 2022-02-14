@@ -3,7 +3,7 @@ from flask import Flask, render_template, url_for, redirect, request, flash, ses
 from flask_rbac import RBAC
 from Forms import Signup_Form, Login_Form, CreateVoucherForm
 import shelve, signUp, Voucher
-from flask_login import current_user, login_user, logout_user, LoginManager
+from flask_login import current_user, login_user, logout_user, LoginManager, login_required
 import hashlib
 
 
@@ -228,6 +228,28 @@ def claimed_rewards():
         vouchers_list.append(voucher)
 
     return render_template('claimedRewards.html', count=len(vouchers_list), vouchers_list=vouchers_list)
+
+@app.route('/claimVoucher/<int:id>', methods=['GET', 'POST'])
+@login_required
+def claim_voucher(id):
+
+        vouchers_dict = {}
+        db = shelve.open('voucher.db', 'c')
+
+        try:
+            vouchers_dict = db['Vouchers']
+        except:
+            print("Error in retrieving Vouchers from voucher.db.")
+        print(vouchers_dict)
+        print(id)
+        voucher = vouchers_dict[id]
+        voucher.set_claimed(current_user.get_id())
+        vouchers_dict[id] = voucher
+        db['Vouchers'] = vouchers_dict
+
+        db.close()
+
+        return redirect(url_for('retrieve_vouchers'))
 
 @app.route('/createVoucher', methods=['GET', 'POST'])
 def create_voucher():
