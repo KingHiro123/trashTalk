@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block head %}
+{% block title %}
     <title class="">TrashTalk - Online Gaming Store</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='main.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='productpg.css') }}">
@@ -14,9 +14,9 @@
   <div class='nav-items'>
       <a class="nav-link active" data-bs-toggle="tab" href="/usercart">
         Your Cart
-          <img src="../static/img/cart.jpg" alt="">
+          <img src="/static/images/cart.jpg" alt="">
       </a>
-      <a href="#account"><img src="../static/img/user.jpg" alt=""></a>
+      <a href="#account"><img src=/static/images/user.jpg" alt=""></a>
    </div>
 </nav>
 </div>
