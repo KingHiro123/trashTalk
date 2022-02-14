@@ -25,7 +25,7 @@ def home():
 #Log in
 
 @app.route('/login', methods=['GET','POST'])
-@login_required    
+  
 def login():
 
     login = Login_Form(request.form)
@@ -117,6 +117,7 @@ def signup():
 
 #Logout
 @app.route('/logout')
+@login_required
 def logout():
     logout_user()
     return redirect(url_for('home'))
@@ -133,6 +134,7 @@ def auth():
 
 #Account Management
 @app.route('/account')
+
 def acc_list():
     signup_dict = {}
     try:
