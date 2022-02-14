@@ -26,7 +26,7 @@ def home():
 #Log in
 
 @app.route('/login', methods=['GET','POST'])
-@login_required    
+
 def login():
 
     login = Login_Form(request.form)
