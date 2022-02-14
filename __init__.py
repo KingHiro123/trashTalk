@@ -3,7 +3,7 @@ from flask import Flask, render_template, url_for, redirect, request, flash, ses
 from flask_rbac import RBAC
 from Forms import Signup_Form, Login_Form, CreateVoucherForm
 import shelve, signUp, Voucher
-from flask_login import current_user, login_user, logout_user, LoginManager
+from flask_login import current_user, login_required, login_user, logout_user, LoginManager
 import hashlib
 
 
@@ -25,7 +25,7 @@ def home():
 #Log in
 
 @app.route('/login', methods=['GET','POST'])
-    
+@login_required    
 def login():
 
     login = Login_Form(request.form)
