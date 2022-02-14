@@ -52,7 +52,7 @@ def login():
 
                         return redirect(url_for('login'))
                 
-            login_user(user, remember=login.remember.data)
+            login_user(user)
             flash(f'Successfully logged in!', 'success')
             db.close()
 
@@ -312,6 +312,6 @@ def delete_voucher(id):
     db.close()
 
     return redirect(url_for('retrieve_vouchers'))
-    
+
 if __name__ == "__main__":
     app.run(debug=True)
