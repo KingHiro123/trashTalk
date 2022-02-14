@@ -3,7 +3,8 @@ from flask import Flask, render_template, url_for, redirect, request, flash, ses
 from flask_rbac import RBAC
 from Forms import Signup_Form, Login_Form, CreateVoucherForm
 import shelve, signUp, Voucher
-from flask_login import current_user, login_user, logout_user, LoginManager, login_required
+from flask_login import current_user, login_required, login_user, logout_user, LoginManager
+
 import hashlib
 
 
@@ -25,7 +26,7 @@ def home():
 #Log in
 
 @app.route('/login', methods=['GET','POST'])
-    
+@login_required    
 def login():
 
     login = Login_Form(request.form)
@@ -52,7 +53,7 @@ def login():
 
                         return redirect(url_for('login'))
                 
-            login_user(user, remember=login.remember.data)
+            login_user(user)
             flash(f'Successfully logged in!', 'success')
             db.close()
 
@@ -334,6 +335,6 @@ def delete_voucher(id):
     db.close()
 
     return redirect(url_for('retrieve_vouchers'))
-    
+
 if __name__ == "__main__":
     app.run(debug=True)
