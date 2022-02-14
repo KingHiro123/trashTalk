@@ -1,0 +1,103 @@
+.notactive{
+  color: #696969;
+}
+
+.active{
+  color: black;
+}
+
+.main_content{
+  padding-left: 15px;
+}
+h1{
+  padding-top: 15px;
+  font-weight: 200;
+}
+table{
+  padding-top: 10px;
+}
+.tablehead {
+  width: 400px;
+}
+#product {
+  width: 450px;
+}
+th{
+  padding-top: 5px;
+  padding-bottom: 50px
+}
+td{
+  text-align: center;
+  height: 40px;
+}
+.bottom{
+  display: flex;
+}
+.cartbttn{
+  text-align: center;
+  background-color: #483D8B;
+  width: 250px;
+  height: 50px;
+  padding-top: 15px;
+}
+.cartbttn a{
+  color: #FFFFFF;
+}
+.total{
+  padding-top: 45px;
+  padding-left: 600px;
+  padding-bottom: 20px;
+}
+#checkout{
+  margin-left: 800px;
+}
+.vl {
+  border-left: 4px solid #483D8B;
+  margin-top: 25px;
+  height: 600px;
+  position: absolute;
+  left: 50%;
+  margin-left: -3px;
+  top: 0;
+}
+.first {
+  padding-top: 20px;
+  margin-bottom: 20px;
+}
+.first input{
+  margin-top: 5px;
+  padding-left: 4px;
+  width: 400px;
+  height: 40px;
+}
+.shipping p {
+  margin-top: 20px;
+}
+.shipping input {
+  width: 300px;
+  height: 30px;
+}
+#submit {
+  text-align: center;
+  background-color: #483D8B;
+  margin-top: 35px;
+  width: 250px;
+  height: 50px;
+  color: #FFFFFF;
+  font-size: medium;
+}
+.producttable{
+  width: 700px;
+}
+.tprice {
+  display: flex;
+  margin: 10px;
+}
+.second p {
+    margin-top: 20px;
+}
+.dito {
+    font-weight: normal;
+    padding-left: 500px;
+}
+
