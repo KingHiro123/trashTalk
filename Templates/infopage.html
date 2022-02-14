@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title class="">TrashTalk - Online Gaming Store</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='productpg.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='payment.css') }}">
+{% endblock %}
+
+
+{% block content %}
+<div class="nav">
+<nav class="navbar">
+  <div class='nav-items'>
+      <a class="nav-link active" data-bs-toggle="tab" href="/usercart">
+        Your Cart
+          <img src="../static/img/cart.jpg" alt="">
+      </a>
+      <a href="#account"><img src="../static/img/user.jpg" alt=""></a>
+   </div>
+</nav>
+</div>
+<div class="wrapper">
+  <div class="sidebar">
+      <h2 style="font-weight: normal; font-size:25px;">TrashTalk</h2>
+      <ul>
+        <li class="notcurrent"><a href="/" class="link">Home</a></li>
+        <li class="notcurrent"><a href="/mice" class="link">Mice</a></li>
+        <li class="notcurrent"><a href="/keyboards" class="link">Keyboards</a></li>
+        <li class="notcurrent"><a href="/audio" class="link">Audio</a></li>
+        <li class="notcurrent"><a href="/monitors" class="link">Monitors</a></li>
+      </ul>
+  </div>
+  <div class="main_content">
+    <span class='index'><a href='/usercart' class="active">Cart</a> >
+      <a href='/infopage' class="notactive">Information</a> >
+      <a href='/paymentpage' class="active">Payment</a></span>
+
+      <form class=""  method="post">
+        <div class="first">
+        <h2>Contact Information</h2>
+        <input type="email" name="" value="" placeholder="Email"/><br><br>
+        </div>
+        <div class="shipping">
+          <h2>Shipping Address</h2>
+          <p>Name</p>
+          <input type="text" name="" value="" />
+          <p>Phone</p>
+          <input type="text" name="" value="" />
+          <p>Address</p>
+          <input type="text" name="" value="" style="width: 450px;"/>
+          <p>Country</p>
+          <input type="text" name="" value="" style="width: 150px;"/>
+        </div></form>
+        <a href="/paymentpage">
+        <button id="submit">Continue To Payment</button>
+        </a>
+
+      <div class="vl">
+        <section class="left" style="margin-left: 30px;">
+        <table class="producttable">
+        <caption style="font-size: x-large; font-weight: bold;">Your Product(s)</caption>
+        <tr>
+            <td>Product</td><td>Quantity</td><td>Price</td>
+        </tr>
+{% for name, value in product_list.items(): %}<!--aka self.items-->
+        <tr>
+          <td>{{name}}</td>        <!--itemname-->
+          <td>{{value[1]}}</td>    <!--quantity-->
+          <td>${{"%.2f"|format(value[0] * value[1])}}</td><!--price-->
+          <input type="hidden" class="price" value={{value[0]*value[1]}}>
+        </tr>
+
+{% endfor %}
+        </table><hr>
+        <h3 class="tprice">Subtotal:<span class="dito">$<script type="text/javascript">
+            price =  document.getElementsByClassName("price")
+            total = 0
+            for (let i = 0; i < price.length; i++) {
+              total += parseFloat(price[i].value);
+            }
+            document.write(total.toFixed(2));
+          </script><span></h3>
+        <h3 class="tprice" >Shipping:<span class="dito">$5<span></h3>
+        <br><hr><br>
+        <h2 class="tprice">Total:<span class="dito">$<script>document.write(parseFloat(total.toFixed(2)) + parseInt(5))</script></span></h2>
+        </section>
+      </div>
+  </div>
+
+{% endblock %}
