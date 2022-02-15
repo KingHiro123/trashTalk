@@ -598,7 +598,7 @@ def completeorder():
     for name, value in product_list.items():
       sold_quantity = value
       if item.get_item_description() == name:
-          int(item.get_item_quantity) -= int(sold_quantity)
+          quantity = item.get_item_quantity - int(sold_quantity)
           item.set_item_quantity(quantity)
 
     db['Items'] = item_dict
