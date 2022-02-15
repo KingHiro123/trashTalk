@@ -1,0 +1,54 @@
+{% extends "Base.html" %} {% block head %}<title>TrashTalk - Add Item</title
+><link
+  rel="stylesheet"
+  type="text/css"
+  href="{{ url_for('static',filename='main.css') }}"
+/>
+{% endblock %} {% block body %}
+<div class="d-flex justify-content-start">
+  <div class="wrapper">
+    <div class="sidebar">
+      <h2>TrashTalk</h2>
+      <ul>
+        <li class="notcurrent">
+          <a href="#"><i>Account Management</i></a>
+        </li>
+        <li class="notcurrent">
+          <a href="#"><i>Customer Support</i></a>
+        </li>
+        <li class="current">
+          <a href="/admin/Inventory"><i>Inventory</i></a>
+        </li>
+        <li class="notcurrent">
+          <a href="#"><i>Transaction</i></a>
+        </li>
+        <li class="notcurrent">
+          <a href="#"><i>Rewards</i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% from "includes/_formHelperItem.html" import render_field %}
+
+<div class="d-flex justify-content-center">
+  <div class="main_content">
+    <h1 class="header">Update Item</h1>
+    <div class="row">
+      <form method="POST" action="">
+        <div class="col-offset-1">
+          <div class="form-group">
+            {{ render_field(form.item_brand, class="form-control") }}
+          </div>
+        </div>
+        <div class="col-offset-1">
+          <div class="form-group">
+            {{ render_field(form.item_description, class="form-control") }}
+          </div>
+        </div>
+        <input type="submit" value="Update" class="btn btn-primary" />
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

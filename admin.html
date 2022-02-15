@@ -1,0 +1,47 @@
+{% extends 'base.html' %} {% block head %}
+<title class="">TrashTalk</title>
+<title class="">TrashTalk - Online Gaming Store</title>
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{{ url_for('static',filename='main.css') }}"
+/>
+{% endblock %} {% block body %}
+<div class="nav">
+  <nav class="navbar">
+    <div class="nav-items">
+      <a href="#account"
+        ><img class="usericon" src="../static/img/user.jpg" alt=""
+      /></a>
+    </div>
+  </nav>
+</div>
+<div class="wrapper">
+  <div class="sidebar">
+    <h2>TrashTalk</h2>
+    <ul>
+      <li class="notcurrent">
+        <a href="#"><i>Account Management</i></a>
+      </li>
+      <li class="notcurrent">
+        <a href="#"><i>Customer Support</i></a>
+      </li>
+      <li class="notcurrent">
+        <a href="/admin/Inventory"><i>Inventory</i></a>
+      </li>
+      <li class="notcurrent">
+        <a href="#"><i>Transaction</i></a>
+      </li>
+      <li class="notcurrent">
+        <a href="#"><i>Rewards</i></a>
+      </li>
+    </ul>
+  </div>
+  <div class="main_content">
+    <div class="header">hello</div>
+    <div class="info">
+      <div>lorem lorem</div>
+    </div>
+  </div>
+</div>
+{% endblock %}

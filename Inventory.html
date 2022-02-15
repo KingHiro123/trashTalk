@@ -1,0 +1,107 @@
+{% extends 'base.html' %} {% block head %}
+<title class="">TrashTalk - Online Gaming Store</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static',filename='main.css') }}"
+    />
+{% endblock %} {% block body %}
+<div class="nav">
+  <nav class="navbar">
+    <div class="nav-items">
+      <a href="#account"><img class="usericon"src="../static/img/user.jpg" alt="" /></a>
+    
+      </a>
+    </div>
+  </nav>
+</div>
+    <div class="d-flex justify-content-start">
+      <div class="wrapper">
+        <div class="sidebar">
+          <h2>TrashTalk</h2>
+          <ul>
+            <li class="notcurrent">
+              <a href="#"><i>Account Management</i></a>
+            </li>
+            <li class="notcurrent">
+              <a href="#"><i>Customer Support</i></a>
+            </li>
+            <li class="current">
+              <a href="#"><i>Inventory</i></a>
+            </li>
+            <li class="notcurrent">
+              <a href="#"><i>Transaction</i></a>
+            </li>
+            <li class="notcurrent">
+              <a href="#"><i>Rewards</i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+<div class="main_content">
+  <div class="d-flex justify-content-center">
+    <div class="container">
+        <table class="ItemStock">
+        <legend>Stock List</legend>
+          <thead>
+            <div class="d-flex flex-row">
+              <tr>
+                <div class="col-md-2">
+                  <td>Item ID</td>
+                </div>
+                <div class="col-md-2">
+                  <td>Item Brand</td>
+                </div>
+                <div class="col-md-2">
+                  <td>Item Description</td>
+                </div>
+                <div class="col-md-2">
+                  <td>
+                    <a href="/admin/Inventory/addField"><i>Add Item</i></a>
+                  </td>
+                </div>
+              </tr>
+            </div>
+          </thead>
+          <tbody>
+            {% for item in item_list %}
+            <tr>
+              <div>
+                <td>{{ item.get_item_id() }}</td>
+                <td>{{ item.get_item_brand() }}</td>
+                <td><a
+                  href="/admin/Inventory/ItemDetails/{{item.get_item_id()}}"
+                  >{{ item.get_item_description() }}</a
+                ></td>
+                <td>
+                  <a
+                    href="/admin/Inventory/updateField/{{item.get_item_id()}}"
+                    class="btn btn-warning"
+                    >Update</a
+                  >
+                </td>
+                <td>
+                  <a
+                    href="/admin/Inventory/removeField/{{item.get_item_id()}}"
+                    class="btn btn-danger"
+                    >Delete</a
+                  >
+                </td>
+                {% endfor %}
+                <tr><td></td><td></td><td></td><td></td><td></td>
+                  <td>
+                    <div class=""d-flex justify-content-end"">
+                  <p> Total items: {{ count }}</p>
+                </td></div></tr>
+              </div>
+              
+            </tr>
+          </tbody>
+        </table>
+    </div>
+  </div>
+  </div>
+</div>
+
+{% endblock %}
