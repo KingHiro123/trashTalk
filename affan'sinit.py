@@ -180,9 +180,10 @@ def infopage():
         cart_id = current_user.get_username()
     else:
         cart_id = 1
-    try:
-        product_list = user_cart.get(cart_id)
-    except:
+        
+    product_list = user_cart.get(cart_id)
+    
+    if product_list == None:
         product_list = {"No products yet": [0, 0]}
 
     print(product_list)
@@ -206,9 +207,10 @@ def paymentpage():
         cart_id = current_user.get_username()
     else:
         cart_id = 1
-    try:
-        product_list = user_cart.get(cart_id)
-    except:
+        
+    product_list = user_cart.get(cart_id)
+    
+    if product_list == None:
         product_list = {"No products yet": [0, 0]}
 
     print(product_list)
