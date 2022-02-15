@@ -13,10 +13,10 @@
     <main>
         <div class='box'>
             <div class="inner-box">
-                <div  class="forms-wrap">
+                <div class="forms-wrap">
                     <form action="" class="sign-in-form" autocomplete="off" method="POST">
                         <div class="logo">
-                            <img src="/static/images/logo.png" alt="TrashTalk" />
+                            <img src="/static/images/trashbin.png" alt="TrashTalk" />
                             <h3> TrashTalk </h3>
                         </div>
 
@@ -41,27 +41,34 @@
                             </div>
                             <div class="input-wrap">
                                 <label>Re-Enter Password </label>
-                                {{form.confirmpass(class="form-style")}}
+                                {%if form.confirmpass.errors %}
+                                    {{ form.confirmpass(class="form-style") }}
+                                        {% for error in form.confirmpass.errors %}
+                                            <div class="invalid-feedback">
+                                                <span> {{ error }} </span>
+                                            </div>
+                                        {% endfor %}
+                                {% else %}
+                                    {{ form.confirmpass(class="form-style") }}
+                                {% endif %}
                             </div>
-
-                        <input type="submit" value="Submit" class="sign-btn"/>
-
+                        <input type="submit" value="Sign up" class="sign-btn btn-primary"/>
                         </div>
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                {% for category, message in messages %}
+                                    <div class="alert alert-{{ category }}">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
                     </form>
                     
-                {% with messages = get_flashed_messages(with_categories=true) %}
-                    {% if messages %}
-                        {% for category, message in messages %}
-                            <div class="alert alert-{{ category }}">
-                                {{ message }}
-                            </div>
-                        {% endfor %}
-                    {% endif %}
-                {% endwith %}
                 </div>
-                <div class="carousel">
-                    
-                </div>
+                    <div class="carousel">
+                        
+                    </div>
                 
             </div>
         </div>

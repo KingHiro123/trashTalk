@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <title>TrashTalk - Online Gaming Store</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='productpg.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='payment.css') }}">
+{% endblock %}
+
+{% block content  %}
+<p class="account">Welcome User!</p>
+<div class="nav">
+<nav class="navbar">
+  <div class='nav-items'>
+      <a class="nav-link ative" data-bs-toggle="tab" href="/usercart">
+        Your Cart
+        <img src="../static/images/cart.jpg" alt="">
+      </a>
+      <a href="#account"><img src="../static/images/user.jpg" alt=""></a>
+   </div>
+</nav>
+</div>
+<div class="wrapper">
+  <div class="sidebar">
+      <h2 style="font-weight: normal; font-size:25px;">TrashTalk</h2>
+      <ul>
+        <li class="notcurrent"><a href="/" class="link">Home</a></li>
+        <li class="notcurrent"><a href="/mice" class="link">Mice</a></li>
+        <li class="notcurrent"><a href="/keyboards" class="link">Keyboards</a></li>
+        <li class="notcurrent"><a href="/audio" class="link">Audio</a></li>
+        <li class="notcurrent"><a href="/monitors" class="link">Monitors</a></li>
+      </ul>
+  </div>
+  <div class="main_content">
+    <span class='index'><a href='/usercart' class="notactive">Cart</a> >
+      <a href='/infopage' class="active">Information</a> >
+      <a href='/paymentpage' class="active">Payment</a></span>
+      <h1>Your Cart</h1>
+      <table>
+        <hr>
+        <thead>
+          <tr>
+            <th class="tablehead" id="product">Product</th>
+            <th class="tablehead">Quantity</th>
+            <th class="tablehead">Price</th>
+          </tr>
+        </thead>
+{% for name, value in product_list.items(): %}<!--aka self.items-->
+        <tr>
+          <td>{{name}}</td>        <!--itemname-->
+          <td>{{value[1]}}</td>    <!--quantity-->
+          <td>${{"%.2f"|format(value[0] * value[1])}}</td><!--price-->
+            <input type="hidden" class="price" value={{value[0]*value[1]}}>
+            <form action="{{url_for('additem', itemname=name, quantity=value[1]) }}" method="POST">
+            <td><input type="submit" value="Add"></td>
+            </form><form action="{{url_for('removeitem', itemname=name, quantity=value[1])}}" method="POST">
+            <td><input type="submit" value="Remove"></td>
+            </form>
+        </tr>
+
+{% endfor %}
+      </table>
+      <br>
+      <div class="bottom">
+        <p class="cartbttn"><a href='/'>Continue Shopping</a></p>
+        <div class="total">
+        <span> Your Total: $</span>
+        <span id="code">
+          <script type="text/javascript">
+            price =  document.getElementsByClassName("price")
+            total = 0
+            for (let i = 0; i < price.length; i++) {
+              total += parseFloat(price[i].value);
+            }
+            document.write(total.toFixed(2));
+          </script>
+        </span>
+        </div>
+      </div>
+      <p class="cartbttn" id="checkout"><a href='/infopage'>Checkout</a></p>
+  </div>
+{% endblock %}
