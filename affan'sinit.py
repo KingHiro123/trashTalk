@@ -7,19 +7,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def productpage():
-    # user_accounts = {}
-    # db = shelve.open('user.db', 'r')
-    # try:
-    # if 'User' in db:
-    # user_accounts = db['User']
-    # else:
-    # db['User'] = user_accounts
-    # except:
-    # print("Error in retrieving Items from user.db.")
-    # db.close()
-
-    # get username of account logged in
-    return render_template('productpg.html')  # , username=username)
+    return render_template('productpg.html')
 
 
 @app.route('/addtocart/', methods=['GET', 'POST'])
