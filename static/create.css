@@ -5,17 +5,14 @@ ul {
  box-sizing: border-box;
  text-decoration: none;
 }
-
 body {
  margin: 0;
  font-family: sans-serif;
 }
-
 .wrapper {
  display: flex;
  position: relative;
 }
-
 .wrapper .sidebar {
  position: fixed;
  width: 200px;
@@ -119,10 +116,24 @@ table tr td {
 .nav-items a img {
  width: 30px;
 }
-
 .usericon {
  position: absolute;
  right: 0%;
  margin-right: 20px;
 }
 
+
+h1{
+ text-aligned: center;
+ color: #434a54;
+ font-style: Times New Roman;
+}
+
+div.form-group{
+    margin: 20px 30px;
+    width: 75%;
+    height: 123px;
+    margin: 0 auto;
+    resize: auto;
+    overflow-y: auto;
+}
