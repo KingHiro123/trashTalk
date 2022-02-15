@@ -34,8 +34,11 @@ def addtocart():
             db['Cart'] = user_cart
     except:
         print("Error in retrieving Items from cart.db.")
-
-    cart_id = 1
+        
+    if current_user.is_authenticated:
+        cart_id = current_user.get_username()
+    else:
+        cart_id = 1
     c = Cart(cart_id)
     c.add_item(item_name=request.json['name'], quantity=1, price=request.json['price'])
     print(c.get_total())
