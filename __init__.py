@@ -212,7 +212,7 @@ def rewards():
     for key in vouchers_dict:
         voucher = vouchers_dict.get(key)
         vouchers_list.append(voucher)
-
+    print(vouchers_list)
     return render_template('rewards.html', count=len(vouchers_list), vouchers_list=vouchers_list)
 
 @app.route('/claimedRewards')
