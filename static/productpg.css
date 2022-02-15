@@ -26,7 +26,7 @@
 .bigpic-section{
     width: 100%;
     height: calc(100vh - 120px);
-    background-image: url('../static/img/headpic.jpg');
+    background-image: url('/static/images/headpic.jpg');
     background-size: cover;
     display: flex;
     justify-content: center;
