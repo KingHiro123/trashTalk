@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <title class="">TrashTalk - Online Gaming Store</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='productpg.css') }}">
+{% endblock %}
+
+{% block content %}
+{% if current_user.is_authenticated %}
+<p class="account">Welcome {{ current_user.get_username() }}!</p> <!---   <p class="account">Welcome {username.capitalize}!</p>    --->
+<div class="nav">
+    <nav class="navbar">
+      <div class='nav-items'>
+          <a class="nav-link active" data-bs-toggle="tab" href="/usercart">
+            Your Cart
+              <img src="../static/images/cart.jpg" alt="">
+          </a>
+
+        <a href="#account"><img src="../static/images/user.jpg" alt="">
+            <div class="Users">
+                <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle show" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="true">
+                    <img src="/static/images/BlackHayate.jpg" alt="Shiba Inu" width="32" height="32" class="img-fluid rounded-circle me-1">
+                    <a href="/logout"><button type="button" class="btn btn-outline-light me-2"> Logout  </button></a>
+                </a>
+            </div>
+        </a>
+{% else %}
+<p class="account">Welcome User!</p> <!---   <p class="account">Welcome {username.capitalize}!</p>    --->
+<div class="nav">
+<nav class="navbar">
+  <div class='nav-items'>
+      <a class="nav-link active" data-bs-toggle="tab" href="/usercart">
+        Your Cart
+          <img src="../static/images/cart.jpg" alt="">
+      </a>
+      <a href="#account"><img src="../static/images/user.jpg" alt=""> 
+            <div class="Users">
+                <a href="/login"><button type="button" class="btn btn-outline-light me-2"> Login  </button></a>
+                <a href="/signup"><button type="button" class="btn btn-primary"> Register </button></a>
+            </div>
+        {% endif %}
+        </a>
+   </div>
+</nav>
+</div>
+
+<div class="wrapper">
+  <div class="sidebar">
+      <h2 style="font-weight: normal; font-size:25px;">TrashTalk</h2>
+      <ul>
+        <li class="current"><a href="/" class="link">Home</a></li>
+        <li class="notcurrent"><a href="/mice" class="link">Mice</a></li>
+        <li class="notcurrent"><a href="/keyboards" class="link">Keyboards</a></li>
+        <li class="notcurrent"><a href="/audio" class="link">Audio</a></li>
+        <li class="notcurrent"><a href="/monitors" class="link">Monitors</a></li>
+      </ul>
+  </div>
+
+  <div class="main_content">
+    <header class="bigpic-section">
+        <div class="content">
+            <img src="../static/images/logo.png" class="logo" alt="">
+            <p class="sub-heading">Best gaming collection of all time</p>
+        </div>
+    </header>
+
+  <section class="product">
+        <h2 class="product-category">Most Popular</h2>
+        <div class="product-cont">
+            <div class="product-popular">
+                <div class="product-images">
+                    <a href="/rogmonitor"><img src="/static/images/pop1.jpg"></a>
+                <div class="product-info">
+                    <input type="hidden" id="item1" value="item1">
+                    <h2 class="product-brand" >ROG STRIX XG32VQ</h2>
+                    <p class="product-short-des">32" Curved Gaming Monitor</p>
+                    <span class="price">$1349.99</span>
+                    <input type="button" onclick="cart('item1')" class="thatonebutton" value="Add to cart"/>
+                    <input type="hidden" id="item1_name" value="ROG STRIX XG32VQ">
+                    <input type="hidden" id="item1_price" value=1349.99>
+                </div>
+            </div>
+        </div>
+    <section id="cards">
+      <h2 class="product-category">Best Selling</h2>
+      <div class="product-container">
+        <div class="product-card"> <!---copy paste this card--->
+          <div class="product-image">
+              <img src="../static/images/card1.png" class="product-thumb" alt="">
+              <button class="card-btn" onclick="cart('item2')">Add to cart</button>
+              <input type="hidden" id="item2_name" value="Logitech G203">
+              <input type="hidden" id="item2_price" value=50>
+          </div>
+          <div class="product-info">
+              <h2 class="product-brand" ><a href="/logimouse">Logitech G203</a></h2>
+              <p class="product-short-des">LIGHTSYNC</p>
+              <span class="price">$50</span>
+          </div>
+        </div>    <!--- til here--->
+        <div class="product-card"> <!---copy paste this card--->
+          <div class="product-image">
+              <img src="../static/images/card2.jpg" class="product-thumb" alt="">
+              <button class="card-btn" onclick="cart('item3')">Add to cart</button>
+              <input type="hidden" id="item3_name" value="Razer Kraken X">
+              <input type="hidden" id="item3_price" value=84.99>
+          </div>
+          <div class="product-info">
+              <h2 class="product-brand"><a href="/razerkraken">Razer Kraken X</a></h2>
+              <p class="product-short-des">Clear & Accurate Positional Audio</p>
+              <span class="price">$84.99</span>
+          </div>
+        </div>    <!--- til here--->
+        <div class="product-card"> <!---copy paste this card--->
+          <div class="product-image">
+              <img src="../static/images/card3.png" class="product-thumb" alt="">
+              <button class="card-btn" onclick="cart('item4')">Add to cart</button>
+              <input type="hidden" id="item4_name" value="Corsair K60 RGB">
+              <input type="hidden" id="item4_price" value=89.99>
+          </div>
+          <div class="product-info">
+              <h2 class="product-brand"><a href="/corsairkeyboard">Corsair K60 RGB</a></h2>
+              <p class="product-short-des">Mechanical Gaming Keyboard</p>
+              <span class="price">$89.99</span>
+          </div>
+        </div>    <!--- til here--->
+      </div>
+    </section>
+  </section>
+
+    <footer>
+        <p class="footer-title">About Company</p>
+        <p class="info">This company sells gaming goods for all you gamers out there!</p>
+        <p class="info">Support Emails - help@trashtalk.com, customersupport@trashtalk.com</p>
+        <p class="info">Telephone - 180 00 00 001</p>
+        <div class="footer-social-container">
+            <div>
+                <a href="#" class="social-link">terms & services</a>
+                <a href="#" class="social-link">privacy page</a>
+                <a href="#/contact" class="social-link">Contact Us</a>
+            </div>
+            <div>
+                <a href="#" class="social-link">Instagram</a>
+                <a href="#" class="social-link">Facebook</a>
+                <a href="#" class="social-link">Twitter</a>
+            </div>
+        </div>
+        <p class="footer-credit">We are the Best gaming accessories online store, allegedly.</p>
+    </footer>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+function cart(id) {
+        var name=document.getElementById( id +"_name").value;
+        var price=document.getElementById( id +"_price").value;
+        alert("Added to cart successfully.");
+        var item = {'name': name, 'price': parseFloat(price)};
+        console.log(item);
+        fetch('/addtocart/', {
+            method: 'POST',
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+            body: JSON.stringify(item)
+        }).then(res => {
+            return res.json()
+        }).then(data => item)
+    };
+
+</script>
+{% endblock %}

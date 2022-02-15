@@ -17,6 +17,21 @@
                 <li class="current"><a href="/createVoucher"><i>Create Voucher</i></a> </li>
                 <li class="notcurrent"><a href="/retrieveVoucher"><i>Retrieve Voucher</i></a> </li>
             </ul>
+
+            {% if current_user.is_authenticated %}
+            <div class="Users">
+                <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle show" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="true">
+                    <img src="/static/images/BlackHayate.jpg" alt="Shiba Inu" width="32" height="32" class="img-fluid rounded-circle me-1">
+                    <strong> {{ current_user.get_username() }} </strong>
+                    <a href="/logout"><button type="button" class="btn btn-outline-light me-2"> Logout  </button></a>
+                </a>
+            </div>
+        {% else %}
+            <div class="Users">
+                <a href="/login"><button type="button" class="btn btn-outline-light me-2"> Login  </button></a>
+                <a href="/signup"><button type="button" class="btn btn-primary"> Register </button></a>
+            </div>
+        {% endif %}
         </div>
     </div>
     <!-- <form method="POST" action="">

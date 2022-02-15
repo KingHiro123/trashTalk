@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <title class="">TrashTalk - Online Gaming Store</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='productpg.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="nav">
+<nav class="navbar">
+  <div class='nav-items'>
+      <a class="nav-link active" data-bs-toggle="tab" href="/usercart">
+        Your Cart
+          <img src="../static/images/cart.jpg" alt="">
+      </a>
+      <a href="#account"><img src="/static/images/user.jpg" alt=""></a>
+   </div>
+</nav>
+</div>
+
+<div class="wrapper">
+  <div class="sidebar">
+      <h2 style="font-weight: normal; font-size:25px;">TrashTalk</h2>
+      <ul>
+        <li class="notcurrent"><a href="/" class="link">Home</a></li>
+        <li class="notcurrent"><a href="/mice" class="link">Mice</a></li>
+        <li class="current"><a href="#/keyboards" class="link">Keyboards</a></li>
+        <li class="notcurrent"><a href="/audio" class="link">Audio</a></li>
+        <li class="notcurrent"><a href="/monitors" class="link">Monitors</a></li>
+      </ul>
+  </div>
+
+  <div class="main_content">
+    <div class="product-container" style="margin-top:50px;">
+      <div class="product-card"> <!---copy paste this card--->
+        <div class="product-image">
+            <img src="../static/images/card3.png" class="product-thumb" alt=""> <!--- THEIMAGE --->
+            <button class="card-btn" onclick="cart('item1')">Add to cart</button>
+        </div>
+        <div class="product-info">
+            <h2 class="product-brand"><a href="/corsairkeyboard">Corsair K60 RGB</a></h2>  <!--- PRODUCT --->
+            <p class="product-short-des">Mechanical Gaming Keyboard</p> <!--- DESCRIPTION --->
+            <span class="price">$89.99</span>  <!--- PRICE --->
+          <input type="hidden" id="item1_name" value="Corsair K60 RGB">
+              <input type="hidden" id="item1_price" value=89.99>
+        </div>
+      </div>    <!--- til here--->
+
+    </div>
+
+      <footer style="margin-top:120px;">
+        <p class="footer-title">About Company</p>
+        <p class="info">This company sells gaming goods for all you gamers out there!</p>
+        <p class="info">Support Emails - help@trashtalk.com, customersupport@trashtalk.com</p>
+        <p class="info">Telephone - 180 00 00 001</p>
+        <div class="footer-social-container">
+            <div>
+                <a href="#" class="social-link">terms & services</a>
+                <a href="#" class="social-link">privacy page</a>
+                <a href="#" class="social-link">Contact Us</a>
+            </div>
+            <div>
+                <a href="#" class="social-link">Instagram</a>
+                <a href="#" class="social-link">Facebook</a>
+                <a href="#" class="social-link">Twitter</a>
+            </div>
+        </div>
+        <p class="footer-credit">Gamer, Best gaming accessories online store</p>
+    </footer>
+
+  </div>
+
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+function cart(id) {
+        var name=document.getElementById( id +"_name").value;
+        var price=document.getElementById( id +"_price").value;
+        alert("Added to cart successfully.");
+        var item = {'name': name, 'price': parseFloat(price)};
+        console.log(item);
+        fetch('/addtocart/', {
+            method: 'POST',
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+            body: JSON.stringify(item)
+        }).then(res => {
+            return res.json()
+        }).then(data => item)
+    };
+
+</script>
+{% endblock %}

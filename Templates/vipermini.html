@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title class="">TrashTalk - Online Gaming Store</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='productpg.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="nav">
+<nav class="navbar">
+  <div class='nav-items'>
+      <a class="nav-link active" data-bs-toggle="tab" href="/usercart">
+        Your Cart
+          <img src="../static/images/cart.jpg" alt="">
+      </a>
+      <a href="#account"><img src="../static/images/user.jpg" alt=""></a>
+   </div>
+</nav>
+</div>
+
+<div class="wrapper">
+  <div class="sidebar">
+      <h2>TrashTalk</h2>
+      <ul>
+        <li class="notcurrent"><a href="/" class="link">Home</a></li>
+        <li class="current"><a href="/mice" class="link">Mice</a></li>
+        <li class="notcurrent"><a href="/keyboards" class="link">Keyboards</a></li>
+        <li class="notcurrent"><a href="/audio" class="link">Audio</a></li>
+        <li class="notcurrent"><a href="/monitors" class="link">Monitors</a></li>
+      </ul>
+  </div>
+
+  <div class="main_content">
+    <section class="product-details" style='width: 100%; padding: 60px 10vw; display: flex; justify-content: space-between;'>
+        <div class="product-images">
+            <img src="../static/images/vipermini.jpg" width="700px" height="500px" style='position: relative; size:cover;'> <!--- THE IMAGE   --->
+        </div>
+        <div class="details" style='width:50%; margin-left:20px;'>
+        <h2 class="product-brand" style='font-size:30px; text-transform: capitalize'>
+          RAZER Viper Mini           <!--- THE PRODUCT   --->
+        </h2>
+        <p class="product-short-des" style='font-size: 25px; line-height: 30px; height: auto; margin: 15px 0 30px;'>
+          Ultra-Lightweight Gaming Mouse with Razer™ Chroma RGB
+      </p>
+        <span class="product-price" style='font-weight: 700; font-size: 30px;'>
+          $69.90                   <!--- THE PRICE   --->
+        </span>
+        <input type="hidden" id="item_name" value="Razer Viper Mini">
+        <input type="hidden" id="item_price" value=69.90>
+        <button class="btn-cart-btn" onclick="cart('item')" style='width: 48%; padding: 20px; border-radius: 5px; background: none; border: 1px solid #383838; color: #383838; font-size: 20px; cursor: pointer; margin: 20px 0; text-transform: capitalize; margin-left: 4%; background: #383838; color: #fff;'>Add to cart</button>
+    </div>
+      </section>
+  </div>
+
+{% endblock %}
+  
+{% block scripts %}
+<script type="text/javascript">
+function cart(id) {
+        var name=document.getElementById( id +"_name").value;
+        var price=document.getElementById( id +"_price").value;
+        alert("Added to cart successfully.");
+        var item = {'name': name, 'price': parseFloat(price)};
+        console.log(item);
+        fetch('/addtocart/', {
+            method: 'POST',
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+            body: JSON.stringify(item)
+        }).then(res => {
+            return res.json()
+        }).then(data => item)
+    };
+
+</script>
+{% endblock %}

@@ -1,11 +1,11 @@
 from wtforms import Form, StringField, EmailField, SubmitField, PasswordField, validators, BooleanField, DateField
-from wtforms.validators import EqualTo, Length
+from wtforms.validators import EqualTo, Length, ValidationError
 from validate_email_address import validate_email
 
 class Signup_Form(Form):
     username = StringField('Username',[validators.DataRequired(), Length(min=2)])
     email = EmailField('Email', [validators.Email(), validators.DataRequired()])
-    password = PasswordField("Password", [validators.DataRequired(), Length(min=8)])
+    password = PasswordField("Password", [validators.DataRequired(), Length(min=8), EqualTo('confirmpass', message="Passwords must match.")])
     confirmpass = PasswordField("Repeat Password", [validators.DataRequired(), Length(min=8), EqualTo('password', message="Passwords must match.")])
     submit = SubmitField('Sign Up')
 
@@ -13,6 +13,7 @@ class Signup_Form(Form):
 class Login_Form(Form):
     username = StringField('Username',[validators.DataRequired()])
     password = PasswordField("Password", [validators.DataRequired()])
+    remember = BooleanField("Remember Me")
     submit = SubmitField('Log In')
 
 class CreateVoucherForm(Form):

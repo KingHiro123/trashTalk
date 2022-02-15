@@ -6,3 +6,5 @@ class Cart(Base):
         Base.__init__(self, datetime.now())
         self.total = 0
         self.items = {}
+
+    

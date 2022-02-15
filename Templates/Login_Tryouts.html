@@ -14,7 +14,7 @@
                 <div  class="forms-wrap">
                     <form action="" class="sign-in-form" autocomplete="off" method="POST">
                         <div class="logo">
-                            <img src="/static/images/logo.png" alt="TrashTalk" />
+                            <img src="/static/images/trashbin.png" alt="TrashTalk" />
                             <h3> TrashTalk </h3>
                         </div>
 
@@ -33,21 +33,21 @@
                                 <label> Password </label>
                                 {{form.password(class="form-style")}}
                             </div>
-                        <input type="submit" value="Submit" class="sign-btn"/>
-
+                        <input type="submit" value="Submit" class="sign-btn btn-primary"/>
                         </div>
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                            {% if messages %}
+                                {% for category, message in messages %}
+                                    <div class="alert alert-{{ category }}">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
                     </form>
-                    
-                {% with messages = get_flashed_messages(with_categories=true) %}
-                    {% if messages %}
-                        {% for category, message in messages %}
-                            <div class="alert alert-{{ category }}">
-                                {{ message }}
-                            </div>
-                        {% endfor %}
-                    {% endif %}
-                {% endwith %}
                 </div>
+
+            
                 <div class="carousel">
                     
                 </div>
