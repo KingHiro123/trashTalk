@@ -73,7 +73,7 @@ def login():
                 #the admin is still being tested, once the group has their code integrated
                 if attempted_username == 'admin' and attempted_password == 'password':
                     login_user(user)
-                    return redirect(url_for('home'))
+                    return redirect(url_for('home'), current_user=attempted_username)
                 else:
                     if login.username.data != user.get_username() or login.password.data != user.get_password():
                         flash(f'Invalid username or password! Please check your login details and try again.', 'warning')
@@ -155,7 +155,7 @@ def logout():
 def auth():
     if request.method == 'GET':
         if current_user.is_authenticated:
-            return render_template("Home_Admin.html")
+            return render_template("productpg.html")
         else:
             return render_template("Login.html")
 
