@@ -23,7 +23,6 @@ app.config['SECRET_KEY'] = 'bananaisagoodfruit'
 #forget password
 #account list design
 #update account list design 
-#dashboard(?)
 #integration (rachel, josh)
 #profile for customer
 #
