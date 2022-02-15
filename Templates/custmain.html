@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}customermain{% endblock %}
+
+{% block content %}
+
+    <title>customer-support</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='custmain.css') }}">
+
+    <div class="wrapper">
+        <div class="sidebar">
+            <a href="/"><h2>TrashTalk</h2></a>
+            <ul>
+                <li class="notcurrent"><a href="#"><i>Account Management</i></a> </li>
+                <li class="current"><a href="/support"><i>Customer Support</i></a></li>
+                <li class="notcurrent"><a href="#"><i>Inventory</i></a> </li>
+                <li class="notcurrent"><a href="#"><i>Transaction</i></a> </li>
+                <li class="notcurrent"><a href="#"><i>Rewards</i></a> </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="image">
+        <img src="https://cdn.searchenginejournal.com/wp-content/uploads/2019/03/A-Complete-Guide-to-Social-Media-Customer-Service-760x400.webp">
+    </div>
+
+    <div class="main_content">
+        <div class="header"><h1>Customer Support</h1></div>
+
+
+        <div class="header" id="Faq">Frequently Asked Questions</div>
+        <div class="questions are the what">
+            <ul>
+                <li><a href="/createfaq">Create Question</a></li>
+                <br>
+                <li><a href="/retrievefaq">View Existing FAQs</a></li>
+            </ul>
+            <br>
+        </div>
+
+         <div class="header" id="Feedback">Fill up a Feedback Form</div>
+         <div class="no">
+             <ul>
+                 <li><a href="/createfeedback">Fill up a feedback form</a></li>
+                 <br>
+                 <li><a href="/retrievefeedback">View existing feedback forms</a></li>
+             </ul>
+             <br>
+         </div>
+
+        <div class="header" id="Chat">Chat with a Support Agent!</div>
+        <div class="no">
+            <ul>
+                <li><a href="/chat">Start a new chat</a></li>
+            </ul>
+            <br>
+        </div>
+
+        <div class="header" id="Home"></div>
+        <div class="bye">
+            <br>
+            <br>
+            <br>
+            <br>
+            <ul>
+
+                <li><a href="/">Back to Homepage</a></li>
+            </ul>
+            <br>
+        </div>
+
+        <br>
+        <br>
+        <br>
+        <br>
+
+    </div>
+
+
+{% endblock %}
