@@ -251,20 +251,24 @@ def completeorder():
         cart_id = 1
     product_list = user_cart.get(cart_id)
     user_cart.pop(cart_id)
-    print(product_list)
-
-    # also minus product from itemdb storage
-    # specific_dict = {}
-    # db = shelve.open('stock.db', 'w')
-    # specific_dict = db['Details']
-
-    # print()
-    # for key in product_list:      # key is the itemname
-    #   specific_dict[key][quantity] -= productlist[key][2]     # make it to int() ?
-
-    # db['Details'] = specific_dict
-    # db.close()
+    
     db['Cart'] = user_cart
+    db.close()
+    
+    item_dict = {}
+    db = shelve.open('stock.db', 'w')
+    item_dict = db['Items']
+
+    for key in item_dict:
+    item = item_dict[key]
+
+    for name, value in product_list.items():
+      sold_quantity = value
+      if item.get_item_description() == name:
+          int(item.get_item_quantity) -= int(sold_quantity)
+          item.set_item_quantity(quantity)
+
+    db['Items'] = item_dict
     db.close()
     return render_template('productpg.html')
 
