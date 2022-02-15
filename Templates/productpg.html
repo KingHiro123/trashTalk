@@ -1,12 +1,31 @@
 {% extends "base.html" %}
 
-{% block title %}
+{% block head %}
     <title class="">TrashTalk - Online Gaming Store</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='main.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='productpg.css') }}">
 {% endblock %}
 
 {% block content %}
+{% if current_user.is_authenticated %}
+<p class="account">Welcome {{ current_user.get_username() }}!</p> <!---   <p class="account">Welcome {username.capitalize}!</p>    --->
+<div class="nav">
+    <nav class="navbar">
+      <div class='nav-items'>
+          <a class="nav-link active" data-bs-toggle="tab" href="/usercart">
+            Your Cart
+              <img src="/static/images/cart.jpg" alt="">
+          </a>
+
+        <a href="#account"><img src="/static/images/user.jpg" alt="">
+            <div class="Users">
+                <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle show" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="true">
+                    <img src="/static/images/BlackHayate.jpg" alt="Shiba Inu" width="32" height="32" class="img-fluid rounded-circle me-1">
+                    <a href="/logout"><button type="button" class="btn btn-outline-light me-2"> Logout  </button></a>
+                </a>
+            </div>
+        </a>
+{% else %}
 <p class="account">Welcome User!</p> <!---   <p class="account">Welcome {username.capitalize}!</p>    --->
 <div class="nav">
 <nav class="navbar">
@@ -15,7 +34,13 @@
         Your Cart
           <img src="/static/images/cart.jpg" alt="">
       </a>
-      <a href="#account"><img src="/static/images/user.jpg" alt=""></a>
+      <a href="#account"><img src="/static/images/user.jpg" alt=""> 
+            <div class="Users">
+                <a href="/login"><button type="button" class="btn btn-outline-light me-2"> Login  </button></a>
+                <a href="/signup"><button type="button" class="btn btn-primary"> Register </button></a>
+            </div>
+        {% endif %}
+      </a>
    </div>
 </nav>
 </div>
@@ -35,7 +60,7 @@
   <div class="main_content">
     <header class="bigpic-section">
         <div class="content">
-            <img src="/static/images/logo.png" class="logo" alt="">
+            <img src="../static/images/logo.png" class="logo" alt="">
             <p class="sub-heading">Best gaming collection of all time</p>
         </div>
     </header>
@@ -45,7 +70,7 @@
         <div class="product-cont">
             <div class="product-popular">
                 <div class="product-images">
-                    <a href="/rogmonitor"><img src="/static/images/pop1.jpg"></a>
+                    <a href="/rogmonitor"><img src="../static/images/pop1.jpg"></a>
                 <div class="product-info">
                     <input type="hidden" id="item1" value="item1">
                     <h2 class="product-brand" >ROG STRIX XG32VQ</h2>
@@ -62,7 +87,7 @@
       <div class="product-container">
         <div class="product-card"> <!---copy paste this card--->
           <div class="product-image">
-              <img src="/static/images/card1.png" class="product-thumb" alt="">
+              <img src="../static/images/card1.png" class="product-thumb" alt="">
               <button class="card-btn" onclick="cart('item2')">Add to cart</button>
               <input type="hidden" id="item2_name" value="Logitech G203">
               <input type="hidden" id="item2_price" value=50>
@@ -75,7 +100,7 @@
         </div>    <!--- til here--->
         <div class="product-card"> <!---copy paste this card--->
           <div class="product-image">
-              <img src="/static/images/card2.jpg" class="product-thumb" alt="">
+              <img src="../static/images/card2.jpg" class="product-thumb" alt="">
               <button class="card-btn" onclick="cart('item3')">Add to cart</button>
               <input type="hidden" id="item3_name" value="Razer Kraken X">
               <input type="hidden" id="item3_price" value=84.99>
@@ -88,7 +113,7 @@
         </div>    <!--- til here--->
         <div class="product-card"> <!---copy paste this card--->
           <div class="product-image">
-              <img src="/static/images/card3.png" class="product-thumb" alt="">
+              <img src="../static/images/card3.png" class="product-thumb" alt="">
               <button class="card-btn" onclick="cart('item4')">Add to cart</button>
               <input type="hidden" id="item4_name" value="Corsair K60 RGB">
               <input type="hidden" id="item4_price" value=89.99>
