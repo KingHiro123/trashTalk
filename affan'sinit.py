@@ -7,19 +7,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def productpage():
-    # user_accounts = {}
-    # db = shelve.open('user.db', 'r')
-    # try:
-    # if 'User' in db:
-    # user_accounts = db['User']
-    # else:
-    # db['User'] = user_accounts
-    # except:
-    # print("Error in retrieving Items from user.db.")
-    # db.close()
-
-    # get username of account logged in
-    return render_template('productpg.html')  # , username=username)
+    return render_template('productpg.html')
 
 
 @app.route('/addtocart/', methods=['GET', 'POST'])
@@ -34,8 +22,11 @@ def addtocart():
             db['Cart'] = user_cart
     except:
         print("Error in retrieving Items from cart.db.")
-
-    cart_id = 1
+        
+    if current_user.is_authenticated:
+        cart_id = current_user.get_username()
+    else:
+        cart_id = 1
     c = Cart(cart_id)
     c.add_item(item_name=request.json['name'], quantity=1, price=request.json['price'])
     print(c.get_total())
@@ -68,7 +59,10 @@ def usercart():
         print("Error in retrieving Items from cart.db.")
     db.close()
 
-    cart_id = 1
+    if current_user.is_authenticated:
+        cart_id = current_user.get_username()
+    else:
+        cart_id = 1
     product_list = user_cart.get(cart_id)
 
     if product_list == None:
@@ -85,7 +79,10 @@ def additem(itemname, quantity):
     db = shelve.open('cart.db', 'w')
     user_cart = db['Cart']
 
-    cart_id = 1
+    if current_user.is_authenticated:
+        cart_id = current_user.get_username()
+    else:
+        cart_id = 1
     quantity += 1
     product_list = user_cart.get(cart_id)
     product_list[itemname][1] = int(quantity)
@@ -103,7 +100,10 @@ def removeitem(itemname, quantity):
     db = shelve.open('cart.db', 'w')
     user_cart = db['Cart']
 
-    cart_id = 1
+    if current_user.is_authenticated:
+        cart_id = current_user.get_username()
+    else:
+        cart_id = 1
     quantity -= 1
     product_list = user_cart.get(cart_id)
     if quantity == 0:
@@ -175,8 +175,11 @@ def infopage():
     except:
         print("Error in retrieving Items from cart.db.")
     db.close()
-
-    cart_id = 1
+    
+    if current_user.is_authenticated:
+        cart_id = current_user.get_username()
+    else:
+        cart_id = 1
     try:
         product_list = user_cart.get(cart_id)
     except:
@@ -199,7 +202,10 @@ def paymentpage():
         print("Error in retrieving Items from cart.db.")
     db.close()
 
-    cart_id = 1
+    if current_user.is_authenticated:
+        cart_id = current_user.get_username()
+    else:
+        cart_id = 1
     try:
         product_list = user_cart.get(cart_id)
     except:
@@ -226,24 +232,31 @@ def completeorder():
     user_cart = {}
     db = shelve.open('cart.db', 'w')
     user_cart = db['Cart']
-
-    cart_id = 1
+    
+    if current_user.is_authenticated:
+        cart_id = current_user.get_username()
+    else:
+        cart_id = 1
     product_list = user_cart.get(cart_id)
     user_cart.pop(cart_id)
-    print(product_list)
-
-    # also minus product from itemdb storage
-    # specific_dict = {}
-    # db = shelve.open('stock.db', 'w')
-    # specific_dict = db['Details']
-
-    # print()
-    # for key in product_list:      # key is the itemname
-    #   specific_dict[key][quantity] -= productlist[key][2]     # make it to int() ?
-
-    # db['Details'] = specific_dict
-    # db.close()
+    
     db['Cart'] = user_cart
+    db.close()
+    
+    item_dict = {}
+    db = shelve.open('stock.db', 'w')
+    item_dict = db['Items']
+
+    for key in item_dict:
+    item = item_dict[key]
+
+    for name, value in product_list.items():
+      sold_quantity = value
+      if item.get_item_description() == name:
+          int(item.get_item_quantity) -= int(sold_quantity)
+          item.set_item_quantity(quantity)
+
+    db['Items'] = item_dict
     db.close()
     return render_template('productpg.html')
 
