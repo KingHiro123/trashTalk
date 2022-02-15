@@ -71,7 +71,10 @@ def usercart():
         print("Error in retrieving Items from cart.db.")
     db.close()
 
-    cart_id = 1
+    if current_user.is_authenticated:
+        cart_id = current_user.get_username()
+    else:
+        cart_id = 1
     product_list = user_cart.get(cart_id)
 
     if product_list == None:
@@ -88,7 +91,10 @@ def additem(itemname, quantity):
     db = shelve.open('cart.db', 'w')
     user_cart = db['Cart']
 
-    cart_id = 1
+    if current_user.is_authenticated:
+        cart_id = current_user.get_username()
+    else:
+        cart_id = 1
     quantity += 1
     product_list = user_cart.get(cart_id)
     product_list[itemname][1] = int(quantity)
@@ -106,7 +112,10 @@ def removeitem(itemname, quantity):
     db = shelve.open('cart.db', 'w')
     user_cart = db['Cart']
 
-    cart_id = 1
+    if current_user.is_authenticated:
+        cart_id = current_user.get_username()
+    else:
+        cart_id = 1
     quantity -= 1
     product_list = user_cart.get(cart_id)
     if quantity == 0:
@@ -178,8 +187,11 @@ def infopage():
     except:
         print("Error in retrieving Items from cart.db.")
     db.close()
-
-    cart_id = 1
+    
+    if current_user.is_authenticated:
+        cart_id = current_user.get_username()
+    else:
+        cart_id = 1
     try:
         product_list = user_cart.get(cart_id)
     except:
@@ -202,7 +214,10 @@ def paymentpage():
         print("Error in retrieving Items from cart.db.")
     db.close()
 
-    cart_id = 1
+    if current_user.is_authenticated:
+        cart_id = current_user.get_username()
+    else:
+        cart_id = 1
     try:
         product_list = user_cart.get(cart_id)
     except:
@@ -229,8 +244,11 @@ def completeorder():
     user_cart = {}
     db = shelve.open('cart.db', 'w')
     user_cart = db['Cart']
-
-    cart_id = 1
+    
+    if current_user.is_authenticated:
+        cart_id = current_user.get_username()
+    else:
+        cart_id = 1
     product_list = user_cart.get(cart_id)
     user_cart.pop(cart_id)
     print(product_list)
