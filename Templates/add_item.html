@@ -1,0 +1,64 @@
+{% extends "Base_Josh.html" %} {% block head %}<title>TrashTalk - Add Item</title>
+
+{% endblock %} {% block body %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{{ url_for('static',filename='main_Josh.css') }}"
+/>
+<div class="d-flex justify-content-start">
+  <div class="wrapper">
+    <div class="sidebar">
+      <h2>TrashTalk</h2>
+      <ul>
+        <li class="notcurrent">
+          <a href="/account"><i>Account Management</i></a>
+        </li>
+        <li class="notcurrent">
+          <a href="/support"><i>Customer Support</i></a>
+        </li>
+        <li class="current">
+          <a href="/admin/Inventory"><i>Inventory</i></a>
+        </li>
+        <li class="notcurrent">
+          <a href="/rewards"><i>Rewards</i></a>
+        </li>
+      </ul>
+      {% if current_user.is_authenticated %}
+        <div class="Users">
+            <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle show" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="true">
+                <img src="/static/images/admin_icon.png" alt="Shiba Inu" width="32" height="32" class="img-fluid rounded-circle me-1">
+                <strong> Welcome, Admin! </strong>
+            </a>
+        </div>
+        <a href="/logout"><button type="button" class="btn btn-primary"> Logout  </button></a>
+        
+        {% else %}
+        {% endif %}
+    </div>
+    
+  </div>
+</div>
+{% from "includes/_formHelperItem.html" import render_field %}
+
+<div class="d-flex justify-content-center">
+  <div class="main_content">
+    <h1 class="header">Add Item</h1>
+    <div class="row">
+      <form method="POST" action="">
+        <div class="col-offset-1">
+          <div class="form-group">
+            {{ render_field(form.datemanufactured, class="form-control") }}
+          </div>
+        </div>
+        <div class="col-offset-1">
+          <div class="form-group">
+            {{ render_field(form.remarks, class="form-control") }}
+          </div>
+        </div>
+        <input type="submit" value="Submit" class="btn btn-primary" />
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

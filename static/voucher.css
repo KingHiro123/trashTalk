@@ -30,8 +30,8 @@ body {
 
 .wrapper .sidebar ul li{
     padding: 30px;
-    border-bottom: 1px solid rgba(0,0,0,0.05)
-    border-top: 1px solid rgba(255,255,255,0.05)
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    border-top: 1px solid rgba(255,255,255,0.05);
 }
 
 .wrapper .sidebar ul .notcurrent a{
@@ -60,4 +60,10 @@ body {
     position: absolute;
     left: 225px;
     top: 25px;
+}
+.card{
+width: 650%;
+}
+.retrieve-table{
+width: 190%;
 }

@@ -2,102 +2,142 @@
 
 {% block title %}
     <title class="">TrashTalk</title>
-    <link rel="stylesheet" type="text/css" href=" {{ url_for('static', filename='navbar.css') }}" >
-{% endblock %}
+    {% endblock %}
 
 {% block content %}
+<link rel="stylesheet" type="text/css" href=" {{ url_for('static', filename='navbar.css') }}" >
+
 <div class="wrapper">
     <div class="sidebar">
         <h2>TrashTalk</h2> 
         <ul>
-            <li class="notcurrent"><a href="/admin">Dashboard</a></li>
+            
             <li class="current"><a href="/account"><i>Account Management</i></a> </li>
-            <li class="notcurrent"><a href="#"><i>Customer Support</i></a> </li>
-            <li class="notcurrent"><a href="#"><i>Inventory</i></a> </li>
+            <li class="notcurrent"><a href="/support"><i>Customer Support</i></a> </li>
+            <li class="notcurrent"><a href="/admin/Inventory"><i>Inventory</i></a> </li>
             <li class="notcurrent"><a href="/rewards"><i>Rewards</i></a> </li>
-            <li class="notcurrent"><a href="/claimedRewards"><i>Claimed Rewards</i></a> </li>
         </ul>
 
         {% if current_user.is_authenticated %}
-            <div class="Users">
-                <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle show" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="true">
-                    <img src="/static/images/BlackHayate.jpg" alt="Shiba Inu" width="32" height="32" class="img-fluid rounded-circle me-1">
-                    <strong> {{ current_user.get_username() }} </strong>
-                    <a href="/logout"><button type="button" class="btn btn-outline-light me-2"> Logout  </button></a>
-                </a>
-            </div>
+        <div class="Users">
+            <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle show" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="true">
+                <img src="/static/images/admin_icon.png" alt="Shiba Inu" width="32" height="32" class="img-fluid rounded-circle me-1">
+                <strong> Welcome, Admin! </strong>
+            </a>
+        </div>
+        <a href="/logout"><button type="button" class="btn btn-primary"> Logout  </button></a>
+        
         {% else %}
-            <div class="Users">
-                <a href="/login"><button type="button" class="btn btn-outline-light me-2"> Login  </button></a>
-                <a href="/signup"><button type="button" class="btn btn-primary"> Register </button></a>
-            </div>
         {% endif %}
     </div>
 
-<div class="main_content">
-    <h1 class="display-4">Account List</h1>
-    <table class="table table-striped">
-  <thead>
-      <tr>
-          <th>ID</th>
-        <th>Username</th>
-        <th>Email</th>
-        <th>Password</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        {% for list in acc_list %}
-      <tr>
-        <td>{{ list.get_user_id() }}</td>
-        <td>{{ list.get_username() }}</td>
-        <td>{{ list.get_email() }}</td>
-        <td>{{ list.get_password() }}</td>
-
-        <td><a href="/Update/{{list.get_user_id()}}" class="btn btn-warning">Update</a></td>
-        <td>
-          <form action="{{ url_for('delete_user', id=list.get_user_id()) }}" method="POST">
-            <!--<input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete {{list.get_username()}}?');">-->
-            
-            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal_{{ list.get_user_id() }}">
-              Delete
-            </button>
-          </div>
-          
-          <!-- The Modal -->
-          <div class="modal fade" id="myModal_{{ list.get_user_id() }}">
-            <div class="modal-dialog">
-              <div class="modal-content">
-          
-                <!-- Modal Header -->
-                <div class="modal-header">
-                  <h4 class="modal-title">Delete Confirmation</h4>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-          
-                <!-- Modal body -->
-                <div class="modal-body">
-                  Are you sure you want to delete {{list.get_username()}}?
-                </div>
-          
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                  <input type="Submit" value="Delete" class="btn btn-danger" data-bs-dismiss="modal"> 
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <div class="main_content">
+              <div class="card">
+                <div class="card-title">
+                  <h1 class="display-4">Account List Overview</h1>
+                    <div>
+                      {% if count == 0 %}
+                      <p>There are no users.</p>
+                      {% elif count == 1 %}
+                      <p>There is 1 user.</p>
+                      {% else %}
+                      <p>There are {{ count }} users.</p>
+                      {% endif %}
+                    </div>
                 </div>
               </div>
+            
+                <table class="table table-striped">
+                  <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                
+                        {% for list in acc_list %}
+                      <tr>
+                        <td>{{ list.get_user_id() }}</td>
+                        <td>{{ list.get_username() }}</td>
+                        
+                        <td> <form action="{{ url_for('view_user', id=list.get_user_id()) }}" method="POST">
+                          <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#myModal_{{ list.get_user_id() }}">
+                          View
+                        </button>
+                          <!-- The Modal -->
+                          <div class="modal fade" id="myModal_{{ list.get_user_id() }}">
+                              <div class="modal-dialog">
+                                  <div class="modal-content">
+                              
+                                      <!-- Modal Header -->
+                                      <div class="modal-header">
+                                      <h4 class="modal-title">{{list.get_username()}}'s Card</h4>
+                                      </div>
+                              
+                                      <!-- Modal body -->
+                                      <div class="modal-body">
+                                      <h4 class="Username"> Username: {{list.get_username()}} </h4>
+                                      </div>
+                                      <div class="modal-body">
+                                        <h4 class="Username"> Email: {{list.get_email()}} </h4>
+                                      </div>
+                                      <div class="modal-body">
+                                      <h4 class="Username"> Password: {{list.get_password()}} </h4>
+                                      </div>
+                              
+                                      <!-- Modal footer -->
+                                      <div class="modal-footer"> 
+                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                        </form>
+                      </td>
+                        <td><a href="/Update/{{list.get_user_id()}}" class="btn btn-warning">Update</a></td>
+                        
+                        <td>
+                          <form action="{{ url_for('delete_user', id=list.get_user_id()) }}" method="POST">
+                            <!--<input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete {{list.get_username()}}?');">-->
+                            
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal2_{{ list.get_user_id() }}">
+                              Delete
+                            </button>
+                          </div>
+                          
+                          <!-- The Modal -->
+                          <div class="modal fade" id="myModal2_{{ list.get_user_id() }}">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                          
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                  <h4 class="modal-title">Delete Confirmation</h4>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                          
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                  Are you sure you want to delete {{list.get_username()}}?
+                                </div>
+                          
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                  <input type="Submit" value="Delete" class="btn btn-danger" data-bs-dismiss="modal"> 
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          </form>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
             </div>
-          </div>
-          </form>
-        </td>
-      </tr>
-    {% endfor %}
-    </tbody>
-  </table>
 
-  
-
-</div>
 </div>
 {% endblock %}
 

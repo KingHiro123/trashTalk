@@ -10,6 +10,7 @@ class Voucher(Base):
         self.__discount = discount
         self.__expiry_date = expiry_date
         self.__points = points
+        self.__claimed = None
 
     def get_voucher_id(self):
         return self.__voucher_id
@@ -23,6 +24,9 @@ class Voucher(Base):
     def get_points(self):
         return self.__points
 
+    def get_claimed(self):
+        return self.__claimed
+
     def set_voucher_id(self, voucher_id):
         self.__voucher_id = voucher_id
 
@@ -34,3 +38,6 @@ class Voucher(Base):
 
     def set_points(self, points):
         self.__points = points
+
+    def set_claimed(self, claimed):
+        self.__claimed = claimed

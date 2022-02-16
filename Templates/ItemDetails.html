@@ -1,0 +1,114 @@
+{% extends 'Base_Josh.html' %} {% block head %}
+
+<title class="">TrashTalk - Online Gaming Store</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static',filename='main_Josh.css') }}"
+    />
+{% endblock %} {% block body %}
+<div class="nav">
+  <nav class="navbar">
+    <div class="nav-items">
+      <a href="#account"><img class="usericon" src="../static/img/user.jpg" alt="" /></a>
+    </div>
+  </nav>
+</div>
+<div class="d-flex justify-content-start">
+  <div class="wrapper">
+    <div class="sidebar">
+      <h2>TrashTalk</h2>
+      <ul>
+        <li class="notcurrent">
+          <a href="/account"><i>Account Management</i></a>
+        </li>
+        <li class="notcurrent">
+          <a href="/support"><i>Customer Support</i></a>
+        </li>
+        <li class="current">
+          <a href="/admin/Inventory"><i>Inventory</i></a>
+        </li>
+        <li class="notcurrent">
+          <a href="/rewards"><i>Rewards</i></a>
+        </li>
+      </ul>
+      {% if current_user.is_authenticated %}
+        <div class="Users">
+            <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle show" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="true">
+                <img src="/static/images/admin_icon.png" alt="Shiba Inu" width="32" height="32" class="img-fluid rounded-circle me-1">
+                <strong> Welcome, Admin! </strong>
+            </a>
+        </div>
+        <a href="/logout"><button type="button" class="btn btn-primary"> Logout  </button></a>
+        
+        {% else %}
+        {% endif %}
+    </div>
+    
+  </div>
+</div>
+<div class="main_content">
+  <div class="d-flex justify-content-center">
+    <div class="container">
+      <div>
+        <table class="ItemStock">
+        <legend>{{item.get_item_brand()}}</legend>
+        <legend>{{item.get_item_description()}}</legend>
+        <legend>{{item.get_item_id()}}</legend>
+          <thead>
+            <div class="row">
+              <tr>
+                <td>SKU</td>
+                <td>Date of Manufacture</td>
+                <td>Remarks</td>
+                <td>
+                  <a href="/admin/Inventory/ItemDetails/{{item.get_item_id()}}/AddDetail"><i>Add Details</i></a>
+                </td>
+              </tr>
+            </div>
+          </thead>
+          <tbody>
+            {% for specific in specific_list %}
+            <tr>
+              <div>
+                <td>{{ specific.get_sku() }}</td>
+                <td>{{ specific.get_datemanufactured() }}</td>
+                <td>{{ specific.get_remarks() }}</a></td>
+                <td>
+                  <a
+                    href="{{url_for('update_details', id=item.get_item_id(), sku=specific.get_sku())}} "
+                    class="btn btn-warning"
+                    >Update</a
+                  >
+                </td>
+                <td>
+                  <a
+                    href="/admin/Inventory/ItemDetails/{{item.get_item_id()}}/removeDetail/{{specific.get_sku()}}"
+                    class="btn btn-danger"
+                    >Delete</a
+                  >
+                </td>
+                {% endfor %}
+                <tr><td></td><td></td><td></td><td></td><td></td>
+                  <td>
+                    <div class=""d-flex justify-content-end"">
+                  {% if count2 == 0 %}
+                  <p>Total items: 0</p>
+                  {% elif count2 == 1 %}
+                  <p>Total items: 1</p>
+                  {% else %}
+                  <p> Total items:{{ count2 }}</p>
+                  {% endif %}
+                </td></div></tr>
+              </div>
+              
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+{% endblock %}

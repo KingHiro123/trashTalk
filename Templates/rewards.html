@@ -12,29 +12,26 @@
         <ul>
             <li class="notcurrent"><a href="/admin"><i>Dashboard</i></a> </li>
             <li class="notcurrent"><a href="/account"><i>Account Management</i></a> </li>
-            <li class="notcurrent"><a href="#"><i>Customer Support</i></a> </li>
-            <li class="notcurrent"><a href="#"><i>Inventory</i></a> </li>
-            <li class="current"><a href="/rewards"><i>Rewards</i></a> </li>
+            <li class="notcurrent"><a href="/support"><i>Customer Support</i></a> </li>
+            <li class="notcurrent"><a href="/admin/Inventory"><i>Inventory</i></a> </li>
+            <li class="current"><a href="/rewards" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle show" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="true"><i>Rewards</i></a> </li>
             <li class="notcurrent"><a href="/claimedRewards"><i>Claimed Rewards</i></a></li>
             <li class="notcurrent"><a href="/createVoucher"><i>Create Voucher</i></a> </li>
             <li class="notcurrent"><a href="/retrieveVoucher"><i>Retrieve Voucher</i></a> </li>
         </ul>
-
         {% if current_user.is_authenticated %}
-            <div class="Users">
-                <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle show" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="true">
-                    <img src="/static/images/BlackHayate.jpg" alt="Shiba Inu" width="32" height="32" class="img-fluid rounded-circle me-1">
-                    <strong> {{ current_user.get_username() }} </strong>
-                    <a href="/logout"><button type="button" class="btn btn-outline-light me-2"> Logout  </button></a>
-                </a>
-            </div>
+        <div class="Users">
+            <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle show" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="true">
+                <img src="/static/images/admin_icon.png" alt="Shiba Inu" width="32" height="32" class="img-fluid rounded-circle me-1">
+                <strong> Welcome, Admin! </strong>
+            </a>
+        </div>
+        <a href="/logout"><button type="button" class="btn btn-primary"> Logout  </button></a>
+        
         {% else %}
-            <div class="Users">
-                <a href="/login"><button type="button" class="btn btn-outline-light me-2"> Login  </button></a>
-                <a href="/signup"><button type="button" class="btn btn-primary"> Register </button></a>
-            </div>
         {% endif %}
     </div>
+    
     <div class="container">
         <div class="row">
             {% for voucher in vouchers_list %}
@@ -62,7 +59,7 @@
                             Are you sure you want to claim this voucher?
                           </div>
                           <div class="modal-footer">
-                            <button href="" type="button" class="btn btn-success" data-bs-dismiss="modal">Yes</button>
+                            <a href="/claimVoucher/{{voucher.get_voucher_id()}}" class="btn btn-success" >Yes</a>
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>
                           </div>
                         </div>

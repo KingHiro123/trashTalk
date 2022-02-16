@@ -9,17 +9,27 @@
 
 
 {% block content %}
+{% if current_user.is_authenticated %}
+<p class="account">Welcome {{ current_user.get_username() }}!</p> <!---   <p class="account">Welcome {username.capitalize}!</p>    --->
 <div class="nav">
-<nav class="navbar">
-  <div class='nav-items'>
-      <a class="nav-link active" data-bs-toggle="tab" href="/usercart">
-        Your Cart
-          <img src="../static/img/cart.jpg" alt="">
-      </a>
-      <a href="#account"><img src="../static/img/user.jpg" alt=""></a>
-   </div>
-</nav>
+    <nav class="navbar">
+      <div class='nav-items'>
+          <a class="nav-link active" data-bs-toggle="tab" href="/usercart">
+            Your Cart
+              <img src="../static/images/cart.jpg" alt="">
+          </a>
+
+        <a href="#account"><img src="/static/images/BlackHayate.jpg" alt="Shiba Inu" width="32" height="32" class="img-fluid rounded-circle me-1">
+            <div class="Users">
+                <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle show" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="true">                   
+                    <a href="/logout"><button type="button" class="btn btn-outline-light me-2"> Logout  </button></a>
+                </a>
+            </div>
+        </a>
+    </nav>
 </div>
+{% else %}
+{% endif %}
 <div class="wrapper">
   <div class="sidebar">
       <h2 style="font-weight: normal; font-size:25px;">TrashTalk</h2>

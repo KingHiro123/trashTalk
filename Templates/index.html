@@ -1,0 +1,59 @@
+{% extends "Base_Rachel.html" %}
+{% block title %}chatindex{% endblock %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/style.css" >
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="wrapper">
+        <div class="sidebar">
+            <a href="/"><h2>TrashTalk</h2></a>
+            <ul>
+                <li class="notcurrent"><a href="/account"><i>Account Management</i></a> </li>
+                <li class="current"><a href="/support"><i>Customer Support</i></a></li>
+                <li class="notcurrent"><a href="/admin/Inventory"><i>Inventory</i></a> </li>
+                <li class="notcurrent"><a href="/rewards"><i>Rewards</i></a> </li>
+            </ul>
+            {% if current_user.is_authenticated %}
+        <div class="Users">
+            <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle show" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="true">
+                <img src="/static/images/admin_icon.png" alt="Shiba Inu" width="32" height="32" class="img-fluid rounded-circle me-1">
+                <strong> Welcome, Admin! </strong>
+            </a>
+        </div>
+        <a href="/logout"><button type="button" class="btn btn-primary"> Logout  </button></a>
+        
+        {% else %}
+        {% endif %}
+        </div>
+        
+    </div>
+
+    <h1>Chat Support</h1>
+
+        <p>Your Room Number is:</p> <p id="demo"></p>
+
+        <script>
+        let x = Math.floor((Math.random() * 10) + 1);
+        document.getElementById("demo").innerHTML = x;
+        </script>
+
+        <form action="{{url_for('chat')}}" method="POST">
+            <div class="flex">
+                <input type="text" id="username" name="username" class="form-control" placeholder="Username" autocomplete="off" required autofocus>
+                <input type="text" id="room" name="room" class="form-control" placeholder="Room" autocomplete="off" required>
+            </div>
+            <div class="flex">
+                <button value="submit" class="form-button">Start Chat</button>
+            </div>
+        </form>
+</body>
+</html>
+
+{% endblock %}

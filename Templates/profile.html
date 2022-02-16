@@ -1,0 +1,62 @@
+{% extends "Base.html" %} {% block head %}<title>TrashTalk - Profile</title>
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{{ url_for('static',filename='main_Josh.css') }}"
+/>
+{% endblock %} {% block body %}
+<div class="d-flex justify-content-start">
+  <div class="wrapper">
+    <div class="sidebar">
+      <h2>TrashTalk</h2>
+      <ul>
+        <li class="notcurrent">
+          <a href="#"><i></i></a>
+        </li>
+        <li class="notcurrent">
+          <a href="#"><i></i></a>
+        </li>
+        <li class="current">
+          <a href="/admin/Inventory"><i></i></a>
+        </li>
+        <li class="notcurrent">
+          <a href="#"><i></i></a>
+        </li>
+        <li class="notcurrent">
+          <a href="#"><i></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% from "includes/_formHelperItem.html" import render_field %}
+
+<div class="d-flex justify-content-center">
+  <div class="main_content">
+    <h1 class="header">Profile</h1>
+    <div class="row">
+      <form method="POST" action="" enctype="multipart/form-data">
+        <div class="col-offset-1">
+          <div class="form-group">
+            {{ form.username.label(class="form-control-label") }} {% if
+            form.username.errors %} {{ form.username(class="form-control
+            form-control")}}
+          </div>
+        </div>
+        <div class="col-offset-1">
+          <div class="form-group">
+            {{ form.picture.label() }}
+            {{form.picture(class="form-control-file")}} {% if
+            form.picture.errors %} {% for error in form.picture.errors}
+            <span>{{ error }}</span>
+            {% endfor %} {% endif %}
+          </div>
+        </div>
+        <div class="form-group">
+          {{form.submit(class="btn btn-outline-info")}}
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

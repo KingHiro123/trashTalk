@@ -14,7 +14,7 @@
         <div class='box'>
             <div class="inner-box">
                 <div class="forms-wrap">
-                    <form action="" class="sign-in-form" autocomplete="off" method="POST">
+                    <form action="" class="sign-up-form"  method="POST">
                         <div class="logo">
                             <img src="/static/images/trashbin.png" alt="TrashTalk" />
                             <h3> TrashTalk </h3>
@@ -41,20 +41,11 @@
                             </div>
                             <div class="input-wrap">
                                 <label>Re-Enter Password </label>
-                                {%if form.confirmpass.errors %}
-                                    {{ form.confirmpass(class="form-style") }}
-                                        {% for error in form.confirmpass.errors %}
-                                            <div class="invalid-feedback">
-                                                <span> {{ error }} </span>
-                                            </div>
-                                        {% endfor %}
-                                {% else %}
-                                    {{ form.confirmpass(class="form-style") }}
-                                {% endif %}
+                                {{form.confirmpass(class="form-style")}}
                             </div>
-                        <input type="submit" value="Sign up" class="sign-btn btn-primary"/>
+                            <input type="submit" value="Sign up" class="sign-btn btn-primary"/>
                         </div>
-                        {% with messages = get_flashed_messages() %}
+                        {% with messages = get_flashed_messages(with_categories=true) %}
                             {% if messages %}
                                 {% for category, message in messages %}
                                     <div class="alert alert-{{ category }}">
@@ -63,12 +54,12 @@
                                 {% endfor %}
                             {% endif %}
                         {% endwith %}
-                    </form>
-                    
+                    </form>   
                 </div>
-                    <div class="carousel">
+                
+                <div class="carousel">
                         
-                    </div>
+                </div>
                 
             </div>
         </div>

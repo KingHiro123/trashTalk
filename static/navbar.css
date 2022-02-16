@@ -125,3 +125,6 @@ img {
     border-radius: 50%;
   }
 
+btn {
+    align-items: center;
+}
