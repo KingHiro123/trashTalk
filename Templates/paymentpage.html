@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}
+{% block head %}
     <title class="">TrashTalk - Online Gaming Store</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='main.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='productpg.css') }}">
@@ -82,7 +82,7 @@
         <h3 class="tprice">Shipping:<span class="dito">$5<span></h3>
         <br><hr><br>
         <h2 class="tprice">Total:
-            <span class="dito" id="final_price"><!--$10 --><span><!--style="text-decoration: line-through;"-->
+            <span class="dito" id="final_price"><!--$finprice --><span><!--style="text-decoration: line-through;"-->
             $<script>document.write(s)</script>
         </span></span></h2>
         <br><hr><br>
@@ -105,8 +105,9 @@
     function voucherChnge() {
         var discount = document.getElementById("mySelect").value;
         var voucher = document.getElementById("mySelect").innerHTML;
-        var finprice = parseFloat(s) * parseFloat(discount)
-        document.getElementById("final_price").innerHTML = "${}<span style='text-decoration: line-through;'>${}</span>".format(finprice, s)
+        var finprice = parseFloat(s) * parseFloat(discount);
+
+        document.getElementById("final_price").innerHTML = "${}<span style='text-decoration: line-through;'>${}</span>".format(finprice, s);
     }
 
 </script><!--discount (value) is the %. voucher (innerHTML) is the name -->
