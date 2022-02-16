@@ -86,10 +86,11 @@
             $<script>document.write(s)</script>
         </span></span></h2>
         <br><hr><br>
-        <h3 class="tprice">Select Voucher:<select id="voucher" style="margin-left:10px;" onchange="voucherChnge()"></select></h3>
-        {% for voucher in vouchers_list %}
-        <option value="{{ voucher.get_discount() }}">{{ voucher.get_discount() }}% off any purchases</option><!--- for loop block vouchers  --->
+        <h3 class="tprice">Select Voucher:<select id="voucher" style="margin-left:10px;" onchange="voucherChnge()"></h3>
+            {% for voucher in vouchers_list %}
+        <option value="{{ voucher.get_discount() }}">{{ voucher.get_discount() }}</option><!--- for loop block vouchers  --->
         {% endfor %}
+            </select>
         </section>
       </div>
   </div>
