@@ -87,7 +87,9 @@
         </span></span></h2>
         <br><hr><br>
         <h3 class="tprice">Select Voucher:<select id="voucher" style="margin-left:10px;" onchange="voucherChnge()"></select></h3>
-        <option value=""></option><!--- for loop block vouchers  --->
+        {% for voucher in vouchers_list %}
+        <option value="{{ voucher.get_discount() }}">{{ voucher.get_discount() }}% off any purchases</option><!--- for loop block vouchers  --->
+        {% endfor %}
         </section>
       </div>
   </div>
@@ -102,6 +104,8 @@
     function voucherChnge() {
         var discount = document.getElementById("mySelect").value;
         var voucher = document.getElementById("mySelect").innerHTML;
+        var finprice = parseFloat(s) * parseFloat(discount)
+        document.getElementById("final_price").innerHTML = "${}<span style="text-decoration: line-through;">${}</span>".format(finprice, s)
     }
 
 </script><!--discount (value) is the %. voucher (innerHTML) is the name -->
