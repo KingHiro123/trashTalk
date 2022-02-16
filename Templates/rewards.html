@@ -10,11 +10,10 @@
     <div class="sidebar" >
         <h2>TrashTalk</h2>
         <ul>
-            <li class="notcurrent"><a href="/admin"><i>Dashboard</i></a> </li>
             <li class="notcurrent"><a href="/account"><i>Account Management</i></a> </li>
             <li class="notcurrent"><a href="/support"><i>Customer Support</i></a> </li>
             <li class="notcurrent"><a href="/admin/Inventory"><i>Inventory</i></a> </li>
-            <li class="current"><a href="/rewards" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle show" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="true"><i>Rewards</i></a> </li>
+            <li class="current"><a href="/rewards"><i>Rewards</i></a> </li>
             <li class="notcurrent"><a href="/claimedRewards"><i>Claimed Rewards</i></a></li>
             <li class="notcurrent"><a href="/createVoucher"><i>Create Voucher</i></a> </li>
             <li class="notcurrent"><a href="/retrieveVoucher"><i>Retrieve Voucher</i></a> </li>
@@ -31,7 +30,6 @@
         {% else %}
         {% endif %}
     </div>
-    
     <div class="container">
         <div class="row">
             {% for voucher in vouchers_list %}

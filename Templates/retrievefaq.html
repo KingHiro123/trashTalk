@@ -4,18 +4,18 @@
 {% block content %}
 
 <title>retrievefaq</title>
-<link rel="stylesheet" type="text/css" href="{ url_for('static',filename='retrieve.css') }">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='retrieve.css') }}">
 
-  <div class="sidebar">
-          <a href="/"><h2>TrashTalk</h2></a>
-          <ul>
-              <li class="notcurrent"><a href="#"><i>Account Management</i></a> </li>
-              <li class="current"><a href="/support"><i>Customer Support</i></a> </li>
-              <li class="notcurrent"><a href="#"><i>Inventory</i></a> </li>
-              <li class="notcurrent"><a href="#"><i>Transaction</i></a> </li>
-              <li class="notcurrent"><a href="#"><i>Rewards</i></a> </li>
-          </ul>
-          {% if current_user.is_authenticated %}
+    <div class="wrapper">
+        <div class="sidebar">
+            <a href="/"><h2>TrashTalk</h2></a>
+            <ul>
+                <li class="notcurrent"><a href="/account"><i>Account Management</i></a> </li>
+                <li class="current"><a href="/support"><i>Customer Support</i></a></li>
+                <li class="notcurrent"><a href="/admin/Inventory"><i>Inventory</i></a> </li>
+                <li class="notcurrent"><a href="/rewards"><i>Rewards</i></a> </li>
+            </ul>
+            {% if current_user.is_authenticated %}
         <div class="Users">
             <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle show" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="true">
                 <img src="/static/images/admin_icon.png" alt="Shiba Inu" width="32" height="32" class="img-fluid rounded-circle me-1">
@@ -26,17 +26,19 @@
         
         {% else %}
         {% endif %}
-  </div>
+        </div>
+        
+    </div>
 
 <div class="main-content">
 
-  <h1>Retrieve faq data</h1>
+  <h1>Retrieve FAQ data</h1>
 
     {% if count == 0 %}
     <p>There is no data.</p>
     {% endif %}
 
-    <div>
+    <div class="container">
       <table class="table table-striped">
         <thead>
           <tr>
@@ -44,6 +46,7 @@
             <th>Answer</th>
             <th></th>
             <th></th>
+
           </tr>
         </thead>
         <tbody>
@@ -52,9 +55,9 @@
             <td>{{faq.get_question()}}</td>
             <td>{{faq.get_answer()}}</td>
 
-            <td><a href="/updatefaq/{faq.get_question_id()}" class="btn btn-warning">Update</a></td>
+            <td><a href="/updatefaq/{{ faq.get_question_id() }}" class="btn btn-warning">Update</a></td>
             <td>
-              <form action="{url_for('delete_faq', id=faq.get_question_id())}" method="POST">
+              <form action="{{url_for('delete_faq', id=faq.get_question_id())}}" method="POST">
                 <button type="button"  class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal_{{faq.get_question_id()}}">
                   Delete
                 </button>

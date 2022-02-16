@@ -1,66 +1,108 @@
-ul {
+* {
     list-style: none;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     text-decoration: none;
-   }
-   
-   body {
+  }
+  body {
     margin: 0;
     font-family: sans-serif;
-   }
-   
-   .wrapper {
+  }
+  .wrapper {
     display: flex;
     position: relative;
-   }
-   
-   .wrapper .sidebar {
+  }
+  .wrapper .sidebar {
     position: fixed;
     width: 200px;
     height: 100%;
     background: #f5f7fa;
     padding: 30px 0;
-   }
-   
-   .wrapper .sidebar h2 {
+  }
+
+  .wrapper .sidebar h2 {
     color: #434a54;
     text-align: center;
     margin-bottom: 30px;
     font-family: Times New Roman;
-   }
-   
-   .wrapper .sidebar ul li {
+  }
+
+  .wrapper .sidebar ul li {
     padding: 30px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-   }
-   
-   .wrapper .sidebar ul .notcurrent a {
+  }
+
+  .wrapper .sidebar ul .notcurrent a {
     color: #434a54;
     display: block;
-   }
-   
-   .wrapper .sidebar ul .notcurrent:hover {
+  }
+
+  .wrapper .sidebar ul .notcurrent:hover {
     background: #594f8d;
-   }
-   
-   .wrapper .sidebar ul .notcurrent:hover a {
+  }
+
+  .wrapper .sidebar ul .notcurrent:hover a {
     color: #fff;
-   }
-   .wrapper .sidebar ul .current a {
+  }
+  .wrapper .sidebar ul .current a {
     color: #fff;
-   }
-   .wrapper .sidebar ul .current {
+  }
+  .wrapper .sidebar ul .current {
     background: #594f8d;
-   }
-   .wrapper .main_content {
+  }
+  .wrapper .main_content {
     width: 100%;
-    margin-left: 300px;
-    margin-top: 80px;
-    padding: 20px;
-   }
-   
-   p {
-   text-align: center;
-   }
+    margin-left: 200px;
+  }
+  .header {
+    color: #434a54;
+    text-align: center;
+    margin-bottom: 30px;
+    font-family: Times New Roman;
+  }
+  .account {
+    display: flex;
+    position: absolute;
+    padding-left: 40px;
+    font-size: 20px;
+    padding-top: 25px;
+    color: #434a54;
+  }
+  .nav {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 1100px;
+  }
+  .nav-items {
+    display: flex;
+    align-items: center;
+  }
+  .nav-items a {
+    margin-left: 30px;
+    color: #434a54;
+  }
+  .nav-items a img {
+    width: 30px;
+  }
+  .usericon {
+    position: absolute;
+    right: 0%;
+    margin-right: 20px;
+  }
+
+p {
+    text-align: center;
+}
+
+table{
+    width: 85%;
+    text-align: center;
+    margin-top: 15px;
+}
+
+h1 {
+    margin-top: 20px;
+    text-align: center;
+}

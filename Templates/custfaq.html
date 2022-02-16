@@ -1,20 +1,21 @@
-{% extends "Base_Rachel"%}
-{% block title %}customerfaq{% endblock %}
+{% extends "Base_Rachel.html"%}
+{% block title %}customer FAQ{% endblock %}
 
 {% block content %}
 
-<title>customerfaq</title>
-<link rel="stylesheet" type="text/css" href="{ url_for('static',filename='custmain.css') }">
+<title>Customer FAQ data</title>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='retrieve.css') }}">
 
-<div class="sidebar">
-          <a href="/"><h2>TrashTalk</h2></a>
-          <ul>
-              <li class="notcurrent"><a href="/account"><i>Account Management</i></a> </li>
-              <li class="current"><a href="/support"><i>Customer Support</i></a> </li>
-              <li class="notcurrent"><a href="/admin/Inventory"><i>Inventory</i></a> </li>
-              <li class="notcurrent"><a href="/rewards"><i>Rewards</i></a> </li>
-          </ul>
-          {% if current_user.is_authenticated %}
+    <div class="wrapper">
+        <div class="sidebar">
+            <a href="/"><h2>TrashTalk</h2></a>
+            <ul>
+                <li class="notcurrent"><a href="/account"><i>Account Management</i></a> </li>
+                <li class="current"><a href="/support"><i>Customer Support</i></a></li>
+                <li class="notcurrent"><a href="/admin/Inventory"><i>Inventory</i></a> </li>
+                <li class="notcurrent"><a href="/rewards"><i>Rewards</i></a> </li>
+            </ul>
+            {% if current_user.is_authenticated %}
         <div class="Users">
             <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle show" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="true">
                 <img src="/static/images/admin_icon.png" alt="Shiba Inu" width="32" height="32" class="img-fluid rounded-circle me-1">
@@ -25,13 +26,19 @@
         
         {% else %}
         {% endif %}
-  </div>
+        </div>
+        
+    </div>
 
 <div class="main-content">
 
   <h1>FAQs</h1>
 
-    <div>
+    {% if count == 0 %}
+    <p>There is no data.</p>
+    {% endif %}
+
+    <div class="container">
       <table class="table table-striped">
         <thead>
           <tr>

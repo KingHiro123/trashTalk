@@ -9,7 +9,7 @@
 />
 <div class="wrapper">
   <div class="sidebar">
-    <h2>TrashTalk</h2>
+    <a href="/"><h2>TrashTalk</h2></a>
     <ul>
       <li class="notcurrent">
         <a href="/admin"><i>Account Management</i></a>
@@ -24,8 +24,7 @@
         <a href="/rewards"><i>Rewards</i></a>
       </li>
     </ul>
-  </div>
-  {% if current_user.is_authenticated %}
+    {% if current_user.is_authenticated %}
         <div class="Users">
             <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle show" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="true">
                 <img src="/static/images/admin_icon.png" alt="Shiba Inu" width="32" height="32" class="img-fluid rounded-circle me-1">
@@ -36,6 +35,8 @@
         
         {% else %}
         {% endif %}
+  </div>
+  
   <div class="main_content">
     <div class="header">Empty Inventory</div>
     <div class="info">

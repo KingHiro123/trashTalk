@@ -12,6 +12,25 @@
 
 {% block content %}
 <div class="wrapper">
+  <div class="sidebar">
+      <h2 style="font-weight: normal; font-size:25px;">TrashTalk</h2>
+      <ul>
+        <li class="notcurrent"><a href="/" class="link">Home</a></li>
+        <li class="notcurrent"><a href="/account" class="link">Account (For admin side) </a></li>
+        <li class="notcurrent"><a href="/support" class="link">Contact Us</a></li>
+      </ul>
+      {% if current_user.is_authenticated %}
+        <div class="Users">
+            <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle show" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="true">
+                <img src="/static/images/admin_icon.png" alt="Shiba Inu" width="32" height="32" class="img-fluid rounded-circle me-1">
+                <strong> Welcome, Admin! </strong>
+            </a>
+        </div>
+        <a href="/logout"><button type="button" class="btn btn-primary"> Logout  </button></a>
+        
+        {% else %}
+        {% endif %}
+  </div>
   <div class="main_content" >
       <div class='center'>
           <h1>Page Not Found:</h1>

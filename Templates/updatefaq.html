@@ -2,7 +2,35 @@
 {% block title %}TrashTalk{% endblock %}
 
 {% block content %}
+
+<title>updatefaq</title>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='update.css') }}">
+
 {% from "includes/_formHelper.html" import render_field %}
+
+    <div class="wrapper">
+        <div class="sidebar">
+            <a href="/"><h2>TrashTalk</h2></a>
+            <ul>
+                <li class="notcurrent"><a href="#"><i>Account Management</i></a> </li>
+                <li class="current"><a href="/support"><i>Customer Support</i></a></li>
+                <li class="notcurrent"><a href="#"><i>Inventory</i></a> </li>
+                <li class="notcurrent"><a href="#"><i>Transaction</i></a> </li>
+                <li class="notcurrent"><a href="#"><i>Rewards</i></a> </li>
+            </ul>
+        </div>
+        {% if current_user.is_authenticated %}
+        <div class="Users">
+            <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle show" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="true">
+                <img src="/static/images/admin_icon.png" alt="Shiba Inu" width="32" height="32" class="img-fluid rounded-circle me-1">
+                <strong> Welcome, Admin! </strong>
+            </a>
+        </div>
+        <a href="/logout"><button type="button" class="btn btn-primary"> Logout  </button></a>
+        
+        {% else %}
+        {% endif %}
+    </div>
 
 <h1 class="display-4">Update Question List</h1>
 
@@ -10,9 +38,11 @@
   <div class="form-group">
     {{ render_field(form.question, class="form-control") }}
   </div>
-  <div class="form-group">
+
+    <div class="form-group">
     {{ render_field(form.answer, class="form-control") }}
   </div>
-  <input type="submit" value="Submit" class="btn btn-primary"/>
+  <input id="button" type="submit" value="submit" class="btn btn-primary"/>
 </form>
+
 {% endblock %}
